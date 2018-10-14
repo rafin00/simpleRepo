@@ -1,0 +1,634 @@
+FORMAT: 1A
+HOST: http://polls.apiblueprint.org/
+
+# Trip Share
+
+It is simple application to share your ride.
+
+### Verify Phone Number [Post]
+
+It is  verifying phone number after taking it and returning response as verified or not.
+
++ Request (application/json)
+
+        {
+            "phone_number" : 0212121
+        }
+        
++ Response 200 (application/json)
+ 
+     
+    + Body
+
+            {
+                "response" : {
+                    "response_status" : 200,
+                    "response_message" : "Successful"
+                }
+            }
+
+### Phone Number Authentication [POST]
+
+This is for authenticating phone number while signing up in the app. 
+
++ Request (application/json)
+
+        {
+            "auth_code" : “sda23r34”
+
+        }
+
++ Response 200 (application/json)
+
+If phone number exists, then response 200_OK and redirect to sign up to create a new user
+
+    + Body
+
+            {
+                
+                "response" : {
+                   " response_status " : 200
+                   " response_message " : " authenticated "
+                    
+            
+                         } 
+            }
+            
++ Response 201 (application/json)
+
+If phone number exists and has done signup already, then return user information. 
+
+    + Body
+
+            {
+                "data" : {
+                    "user" : {}
+                
+                },
+                "response" : {
+                   " response_status " : 200
+                   " response_message " : " Authenticated "
+                    
+            
+                         } 
+            }
+            
+### Sign Up [POST]
+
+This is for an unregistered user to sign up for a new account with a verified phone number.
+
++ Request (application/json)
+
+    + Attributes
+        + phone_number (string, required)
+        + full_name (string, required)
+        + email (string, optional)
+        + company_email (string, required)
+        + license_number (string, optional)
+        + country_code (string, required)
+        + fb_id (string, optional)
+        + birth_date (string, required)
+        + license_number (string, optional)
+        + profile_pic (byte[], optional)
+        + gender (string, required)
+        
+        
+    + Body
+    
+            {
+                "phone_number" : "01735528397"
+                "full_name" : " shuvo champ "
+                "email" : "nightshuvo@gmail.com"
+                "profile_image" : "url"
+                "company_email" : "shuvo@bracits.com"
+            }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+    
+          data
+
+            {
+                "response_status" : 200
+                "response_message" : " Successful sign up "
+            }
+            
+
+            
+### Logout User [POST]
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
++ Request (application/json)
+
+        {
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            {
+            "success": true
+            "message": "Successfully logout you."
+            }
+
+### Find Trip [GET]
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
++ Request (application/json)
+
+        {
+            "time":"5:30 PM",
+            "date":"2018-08-02",
+            "vehicle_type":"car/cng/bike/any",
+            "seat":"5",
+            "source":"lat/lng",
+            "destination":"lat/lng"
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            [{
+            "results": {
+                "from":"niketan",
+                "to":"uttara",
+                "time":"12:30",
+                "date":"2018-09-09",
+                "price_per_seat":"123",
+                "user":{
+                    "full_name":"raju mazumder",
+                    "rating":"4.5",
+                    "number_of_rides":"4"
+                }
+              },
+              "count": 100,
+              "next":"2",
+              "prev":"1"
+            }]
+            
+### Trip Details [GET]
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
++ Request (application/json)
+
+        {
+            "trip_id":"898jjhh"
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+           {
+            "host": {
+                "profile_pic":"url",
+                "full_name":"raju mazumder",
+                "rating":"4.5",
+                "number_of_rides":"4",
+                "is_phone_number_verified": true,
+                "is_email_address":true
+                "is_company_name": true,
+                "joining_date": "2018-09-09",
+                "reviews":[{
+                    "desc": "test review",
+                    "date": "2018-09-09",
+                    "rating": "4.5",
+                    "reviewer":{
+                        "profile_pic": "url",
+                        "full_name": "raju mazumder"
+                    }
+                }],
+                "is_friend": true,
+                "send_friend_request": true,
+                "mutual_friends": [
+                        {
+                            "full_name": "raju mazumder"
+                            }
+                        ]
+            },
+            "members":
+                [{
+                    "profile_pic":"url",
+                    "first_name":"raju"
+                }],
+            "number_of_seat":4,
+            "price_per_seat":130,
+            "vehicle_type": "car",
+            "empty_seat": "4",
+            "amenities":{
+                "is_smoking": true,
+                "is_music": true,
+                "is_ac": true
+            },
+            "time": "4:50 PM",
+            "date": "2018-09-09"
+           }
+           
+### Triper Details [GET]
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
++ Request (application/json)
+
+        {
+            "trip_id":"898jjhh"
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+           {
+                "profile_pic":"url",
+                "full_name":"raju mazumder",
+                "rating":"4.5",
+                "number_of_rides":"4",
+                "is_phone_number_verified": true,
+                "is_email_address":true
+                "is_company_name": true,
+                "joining_date": "2018-09-09",
+                "reviews":[{
+                    "desc": "test review",
+                    "date": "2018-09-09",
+                    "rating": "4.5",
+                    "reviewer":{
+                        "profile_pic": "url",
+                        "full_name": "raju mazumder"
+                    }
+                }],
+                "is_friend": true,
+                "send_friend_request": true,
+                "mutual_friends": [
+                        {
+                            "full_name": "raju mazumder"
+                            }
+                        ]
+            }
+            
+           
+### Request Trip [GET]
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
++ Request (application/json)
+
+        {
+            "user_id":"442355",
+            "trip_id":"jsgdsg99"
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            [{
+            "results": {
+                "from":"niketan",
+                "to":"uttara",
+                "time":"12:30",
+                "date":"2018-09-09",
+                "price_per_seat":"123",
+                "user":{
+                    "full_name":"raju mazumder",
+                    "rating":"4.5",
+                    "number_of_rides":"4"
+                }
+              },
+              "count": 100,
+              "next":"2",
+              "prev":"1"
+            }]
+            
+### Accept Request [POST]
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
++ Request (application/json)
+
+        {
+            "user_id":"442355",
+            "trip_id":"jsgdsg99"
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            [{
+            "results": {
+                "from":"niketan",
+                "to":"uttara",
+                "time":"12:30",
+                "date":"2018-09-09",
+                "price_per_seat":"123",
+                "user":{
+                    "full_name":"raju mazumder",
+                    "rating":"4.5",
+                    "number_of_rides":"4"
+                }
+              },
+              "count": 100,
+              "next":"2",
+              "prev":"1"
+            }]
+            
+### Declined Request [POST]
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
++ Request (application/json)
+
+        {
+            "user_id":"442355",
+            "trip_id":"jsgdsg99"
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            [{
+            "results": {
+                "from":"niketan",
+                "to":"uttara",
+                "time":"12:30",
+                "date":"2018-09-09",
+                "price_per_seat":"123",
+                "user":{
+                    "full_name":"raju mazumder",
+                    "rating":"4.5",
+                    "number_of_rides":"4"
+                }
+              },
+              "count": 100,
+              "next":"2",
+              "prev":"1"
+            }]
+            
+### All Riding Request [GET]
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
++ Request (application/json)
+
+        {
+            "user_id":"442355"
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            [{
+                "from":"niketan",
+                "to":"uttara",
+                "time":"12:30",
+                "date":"2018-09-09",
+                "seat":"123",
+                "user":{
+                    "full_name":"raju mazumder",
+                    "rating":"4.5",
+                    "company_name":"Brac IT services"
+                }
+              }
+              
+            ]
+            
+### Start Trip [POST]
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
++ Request (application/json)
+
+        {
+            "user_id":"442355",
+            "trip_id":"dsgid"
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            [{
+                "full_name":"niketan",
+                "profile_pic":"url",
+                "source":"niketan",
+                "destination":"uttara",
+                
+              }
+              
+            ]
+            
+### Rate Trip [POST]
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
++ Request (application/json)
+
+        {
+            "user_id":"442355",
+            "trip_id":"dsgid",
+            "rating": "4.5",
+            "review": "test me"
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            [{
+                "from":"niketan",
+                "to":"uttara",
+                "time":"12:30",
+                "date":"2018-09-09",
+                "seat":"123",
+                "user":{
+                    "full_name":"raju mazumder",
+                    "rating":"4.5",
+                    "company_name":"Brac IT services"
+                }
+              }
+              
+            ]
+### Drop Rider [POST]
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
++ Request (application/json)
+
+        {
+            "user_id":"442355",
+            "trip_id":"dsgid",
+            
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            [{
+                "from":"niketan",
+                "to":"uttara",
+                "time":"12:30",
+                "date":"2018-09-09",
+                "seat":"123",
+                "user":{
+                    "full_name":"raju mazumder",
+                    "rating":"4.5",
+                    "company_name":"Brac IT services"
+                }
+              }
+              
+            ]
+            
+### Trip End [POST]
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
++ Request (application/json)
+
+        {
+            "user_id":"442355",
+            "trip_id":"dsgid",
+            
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            [{
+                "from":"niketan",
+                "to":"uttara",
+                "time":"12:30",
+                "date":"2018-09-09",
+                "seat":"123",
+                "user":{
+                    "full_name":"raju mazumder",
+                    "rating":"4.5",
+                    "company_name":"Brac IT services"
+                }
+              }
+              
+            ]
+            
+### Create Trip [POST]
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
++ Request (application/json)
+
+        {
+            "time":"4:50 PM",
+            "date":"2018-09-09",
+            "from": "niketan",
+            "to": "uttara",
+            "vehicle_type": "car",
+            "personal": "yes/no",
+            "is_ac": true,
+            "is_music": true,
+            "is_smoking": true,
+            "number_of_seat": "4",
+            "price_per_seat": "120",
+            "accept_auto": true,
+            "need_confirmation": true
+            
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            {
+            "success": true,
+            "message": "Successfully created"
+            }
+            
+### Update Profile [PUT]
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
++ Request (application/json)
+
+        {
+            "full_name":"raju mazumder",
+            "profile_pic":"url",
+            "home_address": "niketan",
+            "office_address": "uttara",
+            "office_start_time": "4:50 PM",
+            "office_end_time": "5:80 PM"
+            
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            {
+            "success": true,
+            "message": "Successfully created"
+            }
