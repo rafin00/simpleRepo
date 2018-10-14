@@ -83,7 +83,7 @@ This is for an unregistered user to sign up for a new account with a verified ph
         + phone_number (string, required)
         + full_name (string, required)
         + email (string, optional)
-        + company_email (string, required)
+        + company_email (string, optional)
         + license_number (string, optional)
         + country_code (string, required)
         + fb_id (string, optional)
@@ -99,8 +99,14 @@ This is for an unregistered user to sign up for a new account with a verified ph
                 "phone_number" : "01735528397"
                 "full_name" : " shuvo champ "
                 "email" : "nightshuvo@gmail.com"
-                "profile_image" : "url"
                 "company_email" : "shuvo@bracits.com"
+                "license_number" : "46sa4f86as4fg65wa4f6wa"
+                "country_code" : "565"
+                "fb_id" : "65sa4d65as4d6w4d6w"
+                "birth_date" : "2/3/5689"
+                "license_number" : "4d6s5a4d6as46a"
+                "profile_pic" : "7w9q8e76a5s4d"
+                "gender" : "male"
             }
 
 + Response 200 (application/json)
@@ -109,13 +115,72 @@ This is for an unregistered user to sign up for a new account with a verified ph
 
     + Body
     
-          data
-
             {
-                "response_status" : 200
-                "response_message" : " Successful sign up "
+                "data" : {
+                        "user" : {}
+                    
+                    },
+                "response" : {
+                       "response_status" : 200
+                       "response_message" : "authenticated"
+                             } 
+            }
+
+            
+### License verification [POST]
+
+This is for an unregistered user to sign up for a new account with a verified phone number.
+
++ Request (application/json)
+
+    + Attributes
+        + license_number (string, optional)
+        
+        
+    + Body
+    
+            {
+                "license_number" : "4d6s5a4d6as46a"
+            }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+    
+            {
+                "response" : {
+                       "response_status" : 200
+                       "response_message" : "valid"
+                             } 
             }
             
++ Response 409 (application/json)
+
+   Already exists license
+
+    + Body
+    
+            {
+                "response" : {
+                       "response_status" : 409
+                       "response_message" : "Already Exists"
+                             } 
+            }
+
++ Response 401 (application/json)
+
+   Invalid license
+
+    + Body
+    
+            {
+                "response" : {
+                       "response_status" : 401
+                       "response_message" : "Invalid License"
+                             } 
+            }
 
             
 ### Logout User [POST]
