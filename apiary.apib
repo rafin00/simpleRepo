@@ -698,20 +698,17 @@ This is for an unregistered user to sign up for a new account with a verified ph
             "message": "Successfully created"
             }
             
-//utshaw
+### Favourites [Get]
 
-
-### View amenities [Put]
-user : admin,regular
 + Headers
     {
         "api_key":"Token dgsdgdsgds"
     }
+    
 + Request (application/json)
 
         {
-           "user_id" : "4as5d4a6"
-
+            "user_id": "s23-234-234-234"
         }
 
 + Response 200 (application/json)
@@ -721,31 +718,45 @@ user : admin,regular
     + Body
 
             {
-            
-            "amenities" : [{
-            "amenity_id" : "4as5d4a6"
-            "amenity_name" : "Baby_on_board"
-            "status" : "true";
-            }],
-            
-            "success": true,
-            "message": "Successfully added"
+                "results" : [
+                    { 
+                        "name" : "Work",
+                        "location" : "30.23423/23.23434",
+                        "location_name" : "Brac IT Services"
+                    },
+                    { 
+                        "name" : "Home",
+                        "location" : "30.23423/23.23434",
+                        "location_name" : "agargaon"
+                    },
+                    { 
+                        "name" : "AIUB",
+                        "location" : "30.23423/23.23434",
+                        "location_name" : "American International University Bangladesh"
+                    }
+                ],
+                "response" : {
+                    "response_status" : 200,
+                    "response_message" : "Successful"
+                }
             }
             
+### Create Favourites [Post]
 
-
-
-### Add amenities [Post]
-user : admin
 + Headers
     {
         "api_key":"Token dgsdgdsgds"
     }
+    
 + Request (application/json)
 
         {
-           "amenity_name" : "Baby_on_board"
-
+            "user_id": "s23-234-234-234",
+            "favorite_place" : { 
+                    "name" : "Work",
+                    "location" : "30.23423/23.23434",
+                    "location_name" : "Brac IT Services"
+                }
         }
 
 + Response 200 (application/json)
@@ -755,34 +766,34 @@ user : admin
     + Body
 
             {
-            "success": true,
-            "message": "Successfully added"
+                "favorite_place" : { 
+                    "name" : "Work",
+                    "location" : "30.23423/23.23434",
+                    "location_name" : "Brac IT Services"
+                },
+                "response" : {
+                    "response_status" : 200,
+                    "response_message" : "Successful"
+                }
             }
             
+### Update Favourites [Put]
 
-+ Response 409 (application/json)
-
-   
-
-    + Body
-
-            {
-            "success": false,
-            "message": "already exists"
-            }
-
-### Hide amenities [Put]
-user : admin
 + Headers
     {
         "api_key":"Token dgsdgdsgds"
     }
+    
 + Request (application/json)
 
         {
-            "amenity_id" : "4as5d4a6"
-            "amenity_name" : "Baby_on_board"
-            "status" : "true";
+            "user_id": "s23-234-234-234",
+            "favorite_place" : { 
+                    "favorites_id" : 2342
+                    "name" : "Work",
+                    "location" : "30.23423/23.23434",
+                    "location_name" : "Brac IT Services"
+                }
         }
 
 + Response 200 (application/json)
@@ -792,22 +803,66 @@ user : admin
     + Body
 
             {
-            "success": true,
-            "message": "Successfully modified"
+                "favorite_place" : {
+                    "name" : "Work",
+                    "location" : "30.23423/23.23434",
+                    "location_name" : "Brac IT Services"
+                },
+                "response" : {
+                    "response_status" : 200,
+                    "response_message" : "Successful"
+                }
             }
             
-### View Trip Requests [Put]
-user : admin
+### Collection Of Companies [Get]
+
 + Headers
     {
         "api_key":"Token dgsdgdsgds"
     }
+    
++ Request (application/json)
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            {
+                "results" : [
+                    { 
+                        "company_id" : "2343",
+                        "company_name" : "Brac Bank Ltd.",
+                        "location_name" : "Anik Tower Niketan"
+                    },
+                    { 
+                        "company_id" : "4356",
+                        "company_name" : "Brac IT Services",
+                        "location_name" : "Niketan"
+                    }
+                ],
+                "response" : {
+                    "response_status" : 200,
+                    "response_message" : "Successful"
+                }
+            }
+            
+### Add a Company [Post]
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
+    
 + Request (application/json)
 
         {
-            "trip_id" : "4as5d4a6"
-            "host_id" : "Baby_on_board"
-            "status" : "ontrie";
+            "company_name" : "Brac Bank Ltd.",
+            "phone_number" : 01676868564,
+            "address" : "34/A niketan, dhaka",
+            "location" : "30.23423/23.23434",
+            "company_email" : "bits@bracits.com"
         }
 
 + Response 200 (application/json)
@@ -817,6 +872,15 @@ user : admin
     + Body
 
             {
-            "success": true,
-            "message": "Successfully modified"
+                "data" :{
+                    "company_name" : "Brac Bank Ltd.",
+                    "phone_number" : 01676868564,
+                    "address" : "34/A niketan, dhaka",
+                    "location" : "30.23423/23.23434",
+                    "company_email" : "bits@bracits.com"
+                },
+                "response" : {
+                    "response_status" : 200,
+                    "response_message" : "Successful"
+                }
             }
