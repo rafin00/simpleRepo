@@ -528,7 +528,389 @@ This is for an unregistered user to sign up for a new account with a verified ph
               
             ]
             
-### Rate Trip [POST]
+
+### Update Profile [PUT]
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
++ Request (application/json)
+
+        {
+            "full_name":"raju mazumder",
+            "profile_pic":"url",
+            "home_address": "niketan",
+            "office_address": "uttara",
+            "office_start_time": "4:50 PM",
+            "office_end_time": "5:80 PM"
+            
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            {
+            "success": true,
+            "message": "Successfully created"
+            }
+            
+//utshaw
+
+
+### View amenities [Put]
+user : admin,regular
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
++ Request (application/json)
+
+        {
+           "user_id" : "4as5d4a6"
+
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            {
+            
+            "amenities" : [{
+            "amenity_id" : "4as5d4a6"
+            "amenity_name" : "Baby_on_board"
+            "status" : "true";
+            }],
+            
+            "success": true,
+            "message": "Successfully added"
+            }
+            
+
+
+
+### Add amenities [Post]
+user : admin
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
++ Request (application/json)
+
+        {
+           "amenity_name" : "Baby_on_board"
+
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            {
+            "success": true,
+            "message": "Successfully added"
+            }
+            
+
++ Response 409 (application/json)
+
+   
+
+    + Body
+
+            {
+            "success": false,
+            "message": "already exists"
+            }
+
+### Hide amenities [Put]
+user : admin
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
++ Request (application/json)
+
+        {
+            "amenity_id" : "4as5d4a6"
+            "amenity_name" : "Baby_on_board"
+            "status" : "true";
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            {
+            "success": true,
+            "message": "Successfully modified"
+            },
+            
+### View All Trip Requests [Put]
+user : admin
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    },
++ Request (application/json)
+
+        {
+            "trip_id" : "4as5d4a6"
+            "host_id" : "Baby_on_board"
+            "status" : "ontrie";
+        },
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            {
+            
+            "trip_requests" : [{
+            "request_id" : "d4as6d4as",
+            "user_id" : "das4d6wa",
+            "user_fullname" : "rafin",
+            "company_name" : "Bits",
+            "user_review" : "4.5",
+            "no_of_rides_taken" : "45",
+            "Source_location" : "lat/lon",
+            "source_location_name" : "niketon",
+            "destination_location" : "lat/lon",
+            "destination_location_name" : "mohakali",
+            "status" : "pending"
+            }]
+            
+            "success": true,
+            "message": "Successfully modified"
+            },
+            
+### View Coming Trip Request [Put]
+
+user : admin
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    };
++ Request (application/json)
+
+        {
+            "trip_id" : "4as5d4a6"
+            "Request_id" : "Baby_on_board"
+            "status" : "ontrie";
+        },
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+        {
+            
+            "user" : {
+            "user_id" : "das4d6wa",
+            "user_fullname" : "rafin",
+            "user_review" : "4.5",
+            "no_of_rides_taken" : "45"
+            "is_phone_varified" : "true",
+            "is_email_verified" : "true",
+            "is_company_verified" : "true",
+             "company" : "Bits",
+            },
+           
+            
+            "Reviews" : [{
+            "from_user_id" : "d4a6d4s"
+            "from_user_fullname" : "khan"
+            "review" : "very good",
+            "rating" : "3.5"
+            }],
+            
+            "trip_request" : {
+            "request_id" : "d4sa6d46a"
+            "Source_location" : "lat/lon",
+            "source_location_name" : "niketon",
+            "destination_location" : "lat/lon",
+            "destination_location_name" : "mohakali",
+            },
+            
+            "status" : "pending",
+           
+            "response" : {
+            "success": "true",
+            "message": "Successfully modified"
+            },
+                
+        },
+
+### Accept/Decline Request [Put]
+
+user : trip_host
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
++ Request (application/json)
+
+        {
+            "user_id" : "4as5d4a6"
+            "trip_request_id" : "d4as5d"
+            "status" : "accept";
+        },
+
+
+
++ Response 401 (application/json)
+
+   
+
+    + Body
+
+        {
+             "response" : {
+            "success": "false",
+            "message": "unauthorized"
+            },    
+           
+        },
+        
+### See trip Map [Get]
+
++ Request (application/json)
+
+        {
+            "user_id" : "4as5d4a6"
+            "trip_id" : "d4as5d"
+        },
+
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+        {
+        
+            "trip_members" : [{
+            "member_id" : "d4sa5d45a6s",
+             "fullname" : "rahin"
+            "profile_pic" : "f4s6df6sd"
+            "pickup_location" : "lat/long",
+            "pickip_loaction_name" : "niketon",
+            "drop_location" : "lat_long";
+            "drop_location_name" : "mohakhali",
+            "final_drop_location" : "lat/lan",
+            "final_drop_location_name" : "badda"
+            "status" : "onroute"
+            }],
+            
+           
+            
+            "response" :    {
+                "success": "false",
+                "message": "unauthorized"
+                            },    
+           
+        },
+
+### End Trip[Put]
+
++ Request (application/json)
+
+        {
+            "user_id" : "4as5d4a6"
+            "trip_id" : "d4as5d"
+        },
+
+
++ Response 200 (application/json)
+
+    + Body
+
+        {
+        
+            "trip_members" : [{
+             "member_id" : "d4sa5d45a6s",
+             "fullname" : "rahin",
+            "profile_pic" : "f4s6df6sd"
+            "amount_paid" : "20"
+            }],
+        "total_earning" : "200",
+            "response" :    {
+                "success": "true",
+                "message": "trip ended"
+                            },    
+           
+        },
+        
++ Response 412 (application/json)
+
+    + Body
+
+        {
+        
+            "response" :    {
+                "success": "false",
+                "message": "trip members exists"
+                            },    
+           
+        },
+
++ Response 401 (application/json)
+
+    + Body
+
+        {
+        
+            "response" :    {
+                "success": "false",
+                "message": "unauthorized"
+                            },    
+           
+        },       
+        
+### Review and rating [post]
+
++ Request (application/json)
+
+        {
+            "from_id" : "4as5d4a6",
+            "to_id" : "4as5d4a6",
+            "trip_id" : "d4as5d"
+            "rating" : "5",
+            "review" : "veru good"
+        },
+
+
++ Response 200 (application/json)
+
+    + Body
+
+        {
+        
+         
+            "response" :    {
+                "success": "true",
+                "message": "R&R received"
+                            },    
+           
+        },
+        
+
+### Drop Rider [Put]
 
 + Headers
     {
@@ -539,41 +921,8 @@ This is for an unregistered user to sign up for a new account with a verified ph
         {
             "user_id":"442355",
             "trip_id":"dsgid",
-            "rating": "4.5",
-            "review": "test me"
-        }
-
-+ Response 200 (application/json)
-
-   
-
-    + Body
-
-            [{
-                "from":"niketan",
-                "to":"uttara",
-                "time":"12:30",
-                "date":"2018-09-09",
-                "seat":"123",
-                "user":{
-                    "full_name":"raju mazumder",
-                    "rating":"4.5",
-                    "company_name":"Brac IT services"
-                }
-              }
-              
-            ]
-### Drop Rider [POST]
-
-+ Headers
-    {
-        "api_key":"Token dgsdgdsgds"
-    }
-+ Request (application/json)
-
-        {
-            "user_id":"442355",
-            "trip_id":"dsgid",
+            "rider_id" : "4a6sd46asd46",
+            "satus" : "dropped"
             
         }
 
@@ -583,56 +932,17 @@ This is for an unregistered user to sign up for a new account with a verified ph
 
     + Body
 
-            [{
-                "from":"niketan",
-                "to":"uttara",
-                "time":"12:30",
-                "date":"2018-09-09",
-                "seat":"123",
-                "user":{
-                    "full_name":"raju mazumder",
-                    "rating":"4.5",
-                    "company_name":"Brac IT services"
-                }
-              }
-              
-            ]
-            
-### Trip End [POST]
-
-+ Headers
-    {
-        "api_key":"Token dgsdgdsgds"
-    }
-+ Request (application/json)
-
-        {
-            "user_id":"442355",
-            "trip_id":"dsgid",
-            
-        }
-
-+ Response 200 (application/json)
-
-   
-
-    + Body
-
-            [{
-                "from":"niketan",
-                "to":"uttara",
-                "time":"12:30",
-                "date":"2018-09-09",
-                "seat":"123",
-                "user":{
-                    "full_name":"raju mazumder",
-                    "rating":"4.5",
-                    "company_name":"Brac IT services"
-                }
-              }
-              
-            ]
-            
+           {
+           
+           "fare" : "30"
+           
+            "response" :    {
+                "success": "true",
+                "message": "R&R received"
+                            },   
+           
+           }
+ 
 ### Create Trip [POST]
 
 + Headers
@@ -669,218 +979,3 @@ This is for an unregistered user to sign up for a new account with a verified ph
             "message": "Successfully created"
             }
             
-### Update Profile [PUT]
-
-+ Headers
-    {
-        "api_key":"Token dgsdgdsgds"
-    }
-+ Request (application/json)
-
-        {
-            "full_name":"raju mazumder",
-            "profile_pic":"url",
-            "home_address": "niketan",
-            "office_address": "uttara",
-            "office_start_time": "4:50 PM",
-            "office_end_time": "5:80 PM"
-            
-        }
-
-+ Response 200 (application/json)
-
-   
-
-    + Body
-
-            {
-            "success": true,
-            "message": "Successfully created"
-            }
-            
-### Favourites [Get]
-
-+ Headers
-    {
-        "api_key":"Token dgsdgdsgds"
-    }
-    
-+ Request (application/json)
-
-        {
-            "user_id": "s23-234-234-234"
-        }
-
-+ Response 200 (application/json)
-
-   
-
-    + Body
-
-            {
-                "results" : [
-                    { 
-                        "name" : "Work",
-                        "location" : "30.23423/23.23434",
-                        "location_name" : "Brac IT Services"
-                    },
-                    { 
-                        "name" : "Home",
-                        "location" : "30.23423/23.23434",
-                        "location_name" : "agargaon"
-                    },
-                    { 
-                        "name" : "AIUB",
-                        "location" : "30.23423/23.23434",
-                        "location_name" : "American International University Bangladesh"
-                    }
-                ],
-                "response" : {
-                    "response_status" : 200,
-                    "response_message" : "Successful"
-                }
-            }
-            
-### Create Favourites [Post]
-
-+ Headers
-    {
-        "api_key":"Token dgsdgdsgds"
-    }
-    
-+ Request (application/json)
-
-        {
-            "user_id": "s23-234-234-234",
-            "favorite_place" : { 
-                    "name" : "Work",
-                    "location" : "30.23423/23.23434",
-                    "location_name" : "Brac IT Services"
-                }
-        }
-
-+ Response 200 (application/json)
-
-   
-
-    + Body
-
-            {
-                "favorite_place" : { 
-                    "name" : "Work",
-                    "location" : "30.23423/23.23434",
-                    "location_name" : "Brac IT Services"
-                },
-                "response" : {
-                    "response_status" : 200,
-                    "response_message" : "Successful"
-                }
-            }
-            
-### Update Favourites [Put]
-
-+ Headers
-    {
-        "api_key":"Token dgsdgdsgds"
-    }
-    
-+ Request (application/json)
-
-        {
-            "user_id": "s23-234-234-234",
-            "favorite_place" : { 
-                    "favorites_id" : 2342
-                    "name" : "Work",
-                    "location" : "30.23423/23.23434",
-                    "location_name" : "Brac IT Services"
-                }
-        }
-
-+ Response 200 (application/json)
-
-   
-
-    + Body
-
-            {
-                "favorite_place" : {
-                    "name" : "Work",
-                    "location" : "30.23423/23.23434",
-                    "location_name" : "Brac IT Services"
-                },
-                "response" : {
-                    "response_status" : 200,
-                    "response_message" : "Successful"
-                }
-            }
-            
-### Collection Of Companies [Get]
-
-+ Headers
-    {
-        "api_key":"Token dgsdgdsgds"
-    }
-    
-+ Request (application/json)
-
-+ Response 200 (application/json)
-
-   
-
-    + Body
-
-            {
-                "results" : [
-                    { 
-                        "company_id" : "2343",
-                        "company_name" : "Brac Bank Ltd.",
-                        "location_name" : "Anik Tower Niketan"
-                    },
-                    { 
-                        "company_id" : "4356",
-                        "company_name" : "Brac IT Services",
-                        "location_name" : "Niketan"
-                    }
-                ],
-                "response" : {
-                    "response_status" : 200,
-                    "response_message" : "Successful"
-                }
-            }
-            
-### Add a Company [Post]
-
-+ Headers
-    {
-        "api_key":"Token dgsdgdsgds"
-    }
-    
-+ Request (application/json)
-
-        {
-            "company_name" : "Brac Bank Ltd.",
-            "phone_number" : 01676868564,
-            "address" : "34/A niketan, dhaka",
-            "location" : "30.23423/23.23434",
-            "company_email" : "bits@bracits.com"
-        }
-
-+ Response 200 (application/json)
-
-   
-
-    + Body
-
-            {
-                "data" :{
-                    "company_name" : "Brac Bank Ltd.",
-                    "phone_number" : 01676868564,
-                    "address" : "34/A niketan, dhaka",
-                    "location" : "30.23423/23.23434",
-                    "company_email" : "bits@bracits.com"
-                },
-                "response" : {
-                    "response_status" : 200,
-                    "response_message" : "Successful"
-                }
-            }
