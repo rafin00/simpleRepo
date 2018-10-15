@@ -963,3 +963,39 @@ user : trip_host
                     "response_message" : "Successful"
                 }
             }
+            
+            ### View Pending Friend Request [Get]
+
+Here user will see the list of pending friends request
+
++ Headers 
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
+    
++ Request (application/json)
+
+        {
+            "user_id" : "2637"
+        }
+        
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "pending_list": [{
+                    "user" : [{
+                                "profile_pic":"url",
+                                "full_name":"utshaw",
+                                "rating":"4.5",
+                            }]
+                                }]
+                        
+                    "mutual_friends": [
+                            {
+                                "full_name": "raju mazumder"
+                                }
+                            ]
+                        
+            }
