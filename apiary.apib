@@ -379,15 +379,21 @@ user : admin,regular
     + Body
 
             {
-            
+            "data" : { 
             "amenities" : [{
             "amenity_id" : "4as5d4a6"
             "amenity_name" : "Baby_on_board"
             "status" : "true";
             }],
-            
-            "success": true,
-            "message": "Successfully added"
+            },
+           
+            "response" : { 
+            "status" : "200",
+            "success": "true",
+            "message": "Successfully added",
+            "error" : [{}]
+            }
+           
             }
             
 
@@ -413,8 +419,13 @@ user : admin
     + Body
 
             {
-            "success": true,
-            "message": "Successfully added"
+            
+             "response" : { 
+            "status" : "200",
+            "success": "true",
+            "message": "Successfully added",
+            "error" : [{}]
+          
             }
             
 
@@ -425,8 +436,12 @@ user : admin
     + Body
 
             {
-            "success": false,
-            "message": "already exists"
+           
+             "response" : { 
+            "status" : "409",
+            "success": "false",
+            "message": "Already Exists",
+            "error" : [{"msg":"aminity name already exists"}]
             }
 
 ### Hide amenities [Put]
@@ -454,8 +469,61 @@ user : admin
             "message": "Successfully modified"
             },
             
-### View All Trip Requests [Put]
-user : admin
+
+### Create Trip [POST]
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
++ Request (application/json)
+
+        {
+            "data" : {
+            "trip" : {
+             "time":"4:50 PM",
+            "date":"2018-09-09",
+            "from": "niketan",
+            "to": "uttara",
+            "vehicle_type": "car",
+            "personal": "yes/no",
+            "is_ac": true,
+            "is_music": true,
+            "is_smoking": true,
+            "number_of_seat": "4",
+            "price_per_seat": "120",
+            "accept_auto": true,
+            "need_confirmation": true
+            },
+            
+            "amenities" : [
+            {
+            "amenity_id" : "1"
+            },
+            {
+            "amenity_id" : "2"
+            },
+            ]
+            
+            },
+           
+            
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            {
+            "success": true,
+            "message": "Successfully created"
+            }
+                        
+
+### View All Trip Requests [Get]
+
 + Headers
     {
         "api_key":"Token dgsdgdsgds"
@@ -475,8 +543,8 @@ user : admin
     + Body
 
             {
-            
-            "trip_requests" : [{
+            "data" : {
+             "trip_requests" : [{
             "request_id" : "d4as6d4as",
             "user_id" : "das4d6wa",
             "user_fullname" : "rafin",
@@ -489,11 +557,17 @@ user : admin
             "destination_location_name" : "mohakali",
             "status" : "pending"
             }]
-            
-            "success": true,
-            "message": "Successfully modified"
             },
+           
             
+           
+             "response" : { 
+            "status" : "200",
+            "success": "true",
+            "message": "Successfully Added",
+            "error" : [{}]
+            },
+[Socket]            
 ### View Coming Trip Request [Put]
 
 user : admin
@@ -516,8 +590,8 @@ user : admin
     + Body
 
         {
-            
-            "user" : {
+            "data" : {
+             "user" : {
             "user_id" : "das4d6wa",
             "user_fullname" : "rafin",
             "user_review" : "4.5",
@@ -545,15 +619,21 @@ user : admin
             },
             
             "status" : "pending",
+            },
            
-            "response" : {
+             "response" : { 
+            "status" : "200",
             "success": "true",
-            "message": "Successfully modified"
+            "message": "Successfully modified",
+            "error" : [{}]
+            },
+           
+          
             },
                 
         },
 
-### Accept/Decline Request [Put]
+### Accept/Decline Trip Request [Put]
 
 user : trip_host
 + Headers
@@ -568,7 +648,23 @@ user : trip_host
             "status" : "accept";
         },
 
++ Response 200 (application/json)
 
+   
+
+    + Body
+
+        {
+             "response" : { 
+            "status" : "200",
+            "success": "true",
+            "message": "Successfully done",
+            "error" : [{}]
+            },
+            },    
+           
+        },
+        
 
 + Response 401 (application/json)
 
@@ -577,9 +673,12 @@ user : trip_host
     + Body
 
         {
-             "response" : {
+             "response" : { 
+            "status" : "401",
             "success": "false",
-            "message": "unauthorized"
+            "message": "Unauthorizad",
+            "error" : [{}]
+            },
             },    
            
         },
@@ -617,10 +716,12 @@ user : trip_host
             
            
             
-            "response" :    {
-                "success": "false",
-                "message": "unauthorized"
-                            },    
+             "response" : { 
+            "status" : "200",
+            "success": "true",
+            "message": "Successfull",
+            "error" : [{}]
+            },
            
         },
 
@@ -640,17 +741,13 @@ user : trip_host
 
         {
         
-            "trip_members" : [{
-             "member_id" : "d4sa5d45a6s",
-             "fullname" : "rahin",
-            "profile_pic" : "f4s6df6sd"
-            "amount_paid" : "20"
-            }],
-        "total_earning" : "200",
-            "response" :    {
-                "success": "true",
-                "message": "trip ended"
-                            },    
+          "response" : { 
+            "status" : "200",
+            "success": "true",
+            "message": "Successfull",
+            "error" : [{}]
+            },
+          
            
         },
         
@@ -660,10 +757,14 @@ user : trip_host
 
         {
         
-            "response" :    {
-                "success": "false",
-                "message": "trip members exists"
-                            },    
+            "response" : { 
+            "status" : "412",
+            "success": "false",
+            "message": "Precondition Failed",
+            "error" : [{
+            "msg" : "Can't end trip with trip members existing"
+            }]
+            },
            
         },
 
@@ -673,11 +774,14 @@ user : trip_host
 
         {
         
-            "response" :    {
-                "success": "false",
-                "message": "unauthorized"
-                            },    
-           
+           "response" : { 
+            "status" : "401",
+            "success": "false",
+            "message": "Unauthorized",
+            "error" : [{
+            "msg" : "Only host can end trip"
+            }]
+            },
         },       
         
 ### Review and rating [post]
@@ -698,13 +802,14 @@ user : trip_host
     + Body
 
         {
-        
+         "response" : { 
+            "status" : "200",
+            "success": "true",
+            "message": "successful",
+            "error" : [{}]
+            },
          
-            "response" :    {
-                "success": "true",
-                "message": "R&R received"
-                            },    
-           
+          
         },
         
 
@@ -734,49 +839,16 @@ user : trip_host
            
            "fare" : "30"
            
-            "response" :    {
-                "success": "true",
-                "message": "R&R received"
-                            },   
+             {
+                 "response" : { 
+                    "status" : "200",
+                    "success": "true",
+                    "message": "successful",
+                    "error" : [{}]
+            },
            
            }
  
-### Create Trip [POST]
-
-+ Headers
-    {
-        "api_key":"Token dgsdgdsgds"
-    }
-+ Request (application/json)
-
-        {
-            "time":"4:50 PM",
-            "date":"2018-09-09",
-            "from": "niketan",
-            "to": "uttara",
-            "vehicle_type": "car",
-            "personal": "yes/no",
-            "is_ac": true,
-            "is_music": true,
-            "is_smoking": true,
-            "number_of_seat": "4",
-            "price_per_seat": "120",
-            "accept_auto": true,
-            "need_confirmation": true
-            
-        }
-
-+ Response 200 (application/json)
-
-   
-
-    + Body
-
-            {
-            "success": true,
-            "message": "Successfully created"
-            }
-            
 ### Favourites [Get]
 
 + Headers
