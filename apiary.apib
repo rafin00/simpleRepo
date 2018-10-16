@@ -522,6 +522,107 @@ user : admin
             }
                         
 
+
+### Edit Trip [Put]
+
++ Headers
+    {
+        "api_key" : "Token dgsdgdsgds"
+    }
++ Request (application/json)
+
+        {
+            "data" : {
+            "user_id" : "a4d6as4d",
+            "trip" : {
+            "trip_id" : "a5sd69a6s",
+             "time":"4:50 PM",
+            "date":"2018-09-09",
+            "from": "niketan",
+            "to": "uttara",
+            "vehicle_type": "car",
+            "personal": "yes/no",
+            "is_ac": true,
+            "is_music": true,
+            "is_smoking": true,
+            "number_of_seat": "4",
+            "price_per_seat": "120",
+            "accept_auto": true,
+            "need_confirmation": true
+            },
+            
+            "amenities" : [
+            {
+            "amenity_id" : "1"
+            },
+            {
+            "amenity_id" : "2"
+            },
+            ]
+            
+            },
+           
+            
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            {
+            
+            "data" : {},
+            
+                                     "response" : { 
+            "status" : "200",
+            "success": "true",
+            "message": "Successfully modified",
+            "error" : [{}]
+            }
+
++ Response 412 (application/json)
+
+   
+
+    + Body
+
+            {
+            
+            "data" : {},
+            
+        "response" : { 
+            "status" : "412",
+            "success": "false",
+            "message": "precondition Failed",
+            "error" : [{
+            "msg" : "can't edit an already started trip"
+            }]
+            }
+            
+  + Response 401 (application/json)
+
+   
+
+    + Body
+
+            {
+            
+            "data" : {},
+            
+        "response" : { 
+            "status" : "401",
+            "success": "false",
+            "message": "unauthorized",
+            "error" : [{
+            "msg" : "only host can start a trip"
+            }]
+            }
+                 
+
+
+
 ### View All Trip Requests [Get]
 
 + Headers
@@ -849,6 +950,9 @@ user : trip_host
            
            }
  
+ 
+ 
+ 
 ### Favourites [Get]
 
 + Headers
@@ -1013,6 +1117,7 @@ user : trip_host
             "phone_number" : 01676868564,
             "address" : "34/A niketan, dhaka",
             "location" : "30.23423/23.23434",
+            
             "company_email" : "bits@bracits.com"
         }
 
@@ -1024,17 +1129,21 @@ user : trip_host
 
             {
                 "data" :{
+                    "company_id" : "4d6w7e",
                     "company_name" : "Brac Bank Ltd.",
                     "phone_number" : 01676868564,
                     "address" : "34/A niketan, dhaka",
                     "location" : "30.23423/23.23434",
                     "company_email" : "bits@bracits.com"
                 },
-                "response" : {
-                    "response_status" : 200,
-                    "response_message" : "Successful"
-                }
+                 
+            "status" : "200",
+            "success": "true",
+            "message": "Successful",
+            "error" : [{}]
+        
             }
+            
             
 ### View Pending Friend Request [Get]
 
