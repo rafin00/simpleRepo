@@ -125,6 +125,81 @@ This is for an unregistered user to sign up for a new account with a verified ph
                        "response_message" : "authenticated"
                              } 
             }
+            
+#############Rahin starts 16th Oct,2018#########
+
+### View profile[Get]
+
+This is for viewing the profile of any user(how it looks like, what data it contains)
+
++ Headers {
+    "api_key" : "Token ddsgdsggff"
+        }
+        
++ Request (application/json)
+    {
+        "user_id" : "74564"
+        "trip_id" : "76438"
+        
+    }
+
+    
+
++ Response 200 (application/json)
+
+    + Body
+    
+        {
+            "user_id" : "74564",
+            "profile_pic" : "url",
+            "full_name" : "utshaw",
+            "rating" :"4.5",
+            "number_of_rides_taken" : "33",
+            "number_of_rides_hosted" : "43",
+            "completeness" : "80%"
+            "is_license_number_verified" : true,
+            "is_phone_number_verified" : true,
+            "is_email_id_verified" : true,
+            "is_facebook_verified" : true,
+            "user_company" :
+                {
+                    "company_id" : "0393",
+                    "is_currently_working" : true,
+                }
+            hosted_ratings_and_review:
+                {
+                    "from" : "utshaw",
+                    "rating" : "4.5"
+                    "review" : "Awesome"
+                }
+            }
+            
+            
+### update profile[Put] 
+
+ This is for editing one's profile, for an overall change.
+ 
+ 
+
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#############Rahin ends 16th Oct,2018#########
+
 
             
 ### License verification [POST]
@@ -527,13 +602,12 @@ user : admin
 
 + Headers
     {
-        "api_key" : "Token dgsdgdsgds"
+        "api_key":"Token dgsdgdsgds"
     }
 + Request (application/json)
 
         {
             "data" : {
-            "user_id" : "a4d6as4d",
             "trip" : {
             "trip_id" : "a5sd69a6s",
              "time":"4:50 PM",
@@ -597,29 +671,9 @@ user : admin
             "success": "false",
             "message": "precondition Failed",
             "error" : [{
-            "msg" : "can't edit an already started trip"
+            "msg" : "can't edit a already started trip"
             }]
             }
-            
-  + Response 401 (application/json)
-
-   
-
-    + Body
-
-            {
-            
-            "data" : {},
-            
-        "response" : { 
-            "status" : "401",
-            "success": "false",
-            "message": "unauthorized",
-            "error" : [{
-            "msg" : "only host can start a trip"
-            }]
-            }
-                 
 
 
 
@@ -1117,7 +1171,6 @@ user : trip_host
             "phone_number" : 01676868564,
             "address" : "34/A niketan, dhaka",
             "location" : "30.23423/23.23434",
-            
             "company_email" : "bits@bracits.com"
         }
 
@@ -1129,21 +1182,17 @@ user : trip_host
 
             {
                 "data" :{
-                    "company_id" : "4d6w7e",
                     "company_name" : "Brac Bank Ltd.",
-                    "phone_number" : "01676868564",
+                    "phone_number" : 01676868564,
                     "address" : "34/A niketan, dhaka",
                     "location" : "30.23423/23.23434",
                     "company_email" : "bits@bracits.com"
                 },
-                 
-            "status" : "200",
-            "success": "true",
-            "message": "Successful",
-            "error" : [{}]
-        
+                "response" : {
+                    "response_status" : 200,
+                    "response_message" : "Successful"
+                }
             }
-            
             
 ### View Pending Friend Request [Get]
 
