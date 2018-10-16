@@ -165,21 +165,84 @@ This is for viewing the profile of any user(how it looks like, what data it cont
                 {
                     "company_id" : "0393",
                     "is_currently_working" : true,
+                    "joined" : "10 July 2018",
                 }
             hosted_ratings_and_review:
                 {
                     "from" : "utshaw",
-                    "rating" : "4.5"
-                    "review" : "Awesome"
+                    "rating" : "4.5",
+                    "review" : "Awesome",
                 }
+            error: {
+                [
+                    ]
             }
+        }
             
             
-### update profile[Put] 
+### Update Profile[PUT] 
 
  This is for editing one's profile, for an overall change.
  
- 
+ + Headers
+    {
+        "api_key" : "Token cjhh"
+    }
++ Request (application/json)
+
+        {   
+            "full_name" : "razib",
+            "profile_pic" : "url",
+            "fb_id" : "facebook.com/teekhikheer",
+            "personal_email" : "meethachuri@apple.com",
+            "birth_date" : "26.01.1900",
+            "license_number" : "846398463905",
+            "gender" : "male/female",
+            "office_start_time" : "8:00",
+            "office_end_time" : "16:00",
+            "phone_number" : "01911232222",
+            "vehicle_type" : "nissan",
+            "country_code" : "BD-007",
+            "home_address" : "hemayetpur",
+            "user_company" : {
+                "company_name" : "BITS",
+                "company_email" : "bits@bracits.com",
+                "company_address" : "niketan",
+            }
+        }
+        
++ Response (application/json)
+    
+        { 
+            "status" : "200",
+            "message" : "successfully updated",
+            "success" : true,
+            "error" : {
+                [
+                    ]
+                {
+            "data" : { 
+                        "full_name" : "razib",
+                        "profile_pic" : "url",
+                        "fb_id" : "facebook.com/teekhikheer",
+                        "personal_email" : "meethachuri@apple.com",
+                        "birth_date" : "26.01.1900",
+                        "license_number" : "846398463905",
+                        "gender" : "male/female",
+                        "office_start_time" : "8:00",
+                        "office_end_time" : "16:00",
+                        "phone_number" : "01911232222",
+                        "vehicle_type" : "nissan",
+                        "country_code" : "BD-007",
+                        "home_address" : "hemayetpur",
+                        "user_company" : {
+                            "company_name" : "BITS",
+                            "company_email" : "bits@bracits.com",
+                            "company_address" : "niketan",
+                    }
+                    
+### Add request company[Post] 
+            
 
             
 
