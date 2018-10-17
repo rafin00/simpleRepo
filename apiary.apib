@@ -1323,3 +1323,363 @@ Here user will see the list of pending friends request
                             ]
                         
             }
+
+### Email varification [Post]
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
+    
++ Request (application/json)
+
+        {
+            "email" : "sdad@gmail.com",
+            
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            {
+                "data" :{},
+                "response" : {
+                    "status" : 200,
+                    "message" : "Successful",
+                    "success" : "true",
+                    "error" : [{}]
+                }
+            }
+
++ Response 400 (application/json)
+
+   
+
+    + Body
+
+            {
+                "data" :{},
+
+                "response" : {
+                    "status" : 400,
+                    "message" : "Bad Request",
+                    "success" : "true",
+                    "error" : [{
+                    "message" : "emain syntax error"
+                    }]
+                }
+            }
++ Response 409 (application/json)
+
+   
+
+    + Body
+
+            {
+                "data" :{},
+
+                "response" : {
+                    "status" : 400,
+                    "message" : "Conflict",
+                    "success" : "true",
+                    "error" : [{
+                    "message" : "Email Already Exists"
+                    }]
+                }
+            }
+
+
+[Admin]
+### Edit Company [Post]
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
+    
++ Request (application/json)
+
+        {
+            "company_name" : "mycom",
+            "phone_number" : "0178764546",
+            "address" : "somewhere",
+            "location" : "lat/lon",
+            "company_email" : "sdad@gmail.com",
+            "verified" : "2"
+            
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            {
+                "data" :{},
+                "response" : {
+                    "status" : 200,
+                    "message" : "Successful",
+                    "success" : "true",
+                    "error" : [{}]
+                }
+            }
+
+[Admin]
+### Delete company[Delete] 
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
+    
++ Request (application/json)
+
+        {
+           "company_id" : "d485a47d6as"
+            
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            {
+                "data" :{},
+                "response" : {
+                    "status" : 200,
+                    "message" : "Successful",
+                    "success" : "true",
+                    "error" : [{}]
+                }
+            }
+
+### View Languages[Get]
+
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
+    
++ Request (application/json)
+
+        {
+           "user_id" : "d485a47d6as"
+            
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            {
+                "data" :{
+                "languages" : [
+                {"BN"},{"EN"},{"FR"},
+                ]
+                },
+                "response" : {
+                    "status" : 200,
+                    "message" : "Successful",
+                    "success" : "true",
+                    "error" : [{}]
+                }
+            }
+
+### Send friend request[Post]
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
+    
++ Request (application/json)
+
+        {
+           "from_id" : "d485a47d6as"
+            "to_id" : "4dsa89d78sa"
+            "status" : "1"
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            {
+                "data" :{},
+                "response" : {
+                    "status" : 200,
+                    "message" : "Successful",
+                    "success" : "true",
+                    "error" : [{}]
+                }
+            }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            {
+                "data" :{},
+                "response" : {
+                    "status" : 200,
+                    "message" : "Successful",
+                    "success" : "false",
+                    "error" : [{
+                    "message" : "Can not send friend rquest"}]
+                }
+            }
+
+
+### Accept/Block/unfriend friend [Post]
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
+    
++ Request (application/json)
+
+        {
+           "from_id" : "d485a47d6as"
+            "to_id" : "4dsa89d78sa"
+            "status" : "1"
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            {
+                "data" :{},
+                "response" : {
+                    "status" : 200,
+                    "message" : "Successful",
+                    "success" : "true",
+                    "error" : [{}]
+                }
+            }
+
+### View Friend request[Get]
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
+    
++ Request (application/json)
+
+        {
+           "user_id" : "d485a47d6as"
+           
+            "status" : "1"
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            {
+                "data" :{
+                "friend" [
+                {"user_id"},
+                {"user_id"},
+                {"user_id"}
+                ]
+                },
+                "response" : {
+                    "status" : 200,
+                    "message" : "Successful",
+                    "success" : "true",
+                    "error" : [{}]
+                }
+            }
+
+
+### Report[Get]
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
+    
++ Request (application/json)
+
+        {
+           "from_id" : "d485a47d6as",
+           "to_id",
+           "report_id" : "3",
+            "report_message" : "abusive language"
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            {
+                
+                "response" : {
+                    "status" : 200,
+                    "message" : "Successful",
+                    "success" : "true",
+                    "error" : [{}]
+                }
+            }
+
+### View Search history[Get]
+
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
+    
++ Request (application/json)
+
+        {
+           "user_id" : "d485a47d6as",
+          
+            "search_query" : "takeout"
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            {
+                "data" : {
+                "user_search_history" : [
+                {
+                "source_location_name" : "niketon",
+                "source_locaation" : "lat/lon",
+                "destination_location_name" : "jamunafuture"
+                "destination_location" : "lat/lon" 
+                }
+                ]},
+                "response" : {
+                    "status" : 200,
+                    "message" : "Successful",
+                    "success" : "true",
+                    "error" : [{}]
+                }
+            }
