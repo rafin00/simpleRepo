@@ -126,7 +126,6 @@ This is for an unregistered user to sign up for a new account with a verified ph
                              } 
             }
             
-#############Rahin starts 16th Oct,2018#########
 
 ### View profile[Get]
 
@@ -180,7 +179,7 @@ This is for viewing the profile of any user(how it looks like, what data it cont
         }
             
             
-### Update Profile[PUT] 
+### update Profile [PUT] 
 
  This is for editing one's profile, for an overall change.
  
@@ -241,7 +240,7 @@ This is for viewing the profile of any user(how it looks like, what data it cont
                             "company_address" : "niketan"
                     }
                     
-### Add request company[Post] 
+### Add request company [Post] 
             
 This is for adding a company by an user when s/he gets a new job :D
 
@@ -274,6 +273,115 @@ This is for adding a company by an user when s/he gets a new job :D
                     ]
             }
             
+### View friend list [Get]
+
+This is for the users to see their friends list, wo are in the list
+
++ Headers
+        { 
+            "api_key" :"ghfxhgsf"
+        }
+
++ Request (application/json)
+    
+        {
+            "user_id" : "gfygf"
+        }
+        
++ Response 200 (application/json)
+
+        {
+                
+          "profile_pic":"url",
+          "full_name":"razib",
+          "rating":"4.5",
+          "number_of_rides":"4",
+          "is_phone_number_verified": true,
+          "is_email_address":true
+          "is_company_name": true,
+          "joining_date": "201-10-2018",
+          "reviews":[{
+              "desc": "too good",
+              "date": "223.10.2018018-09-09",
+              "rating": "4.5",
+              "reviewer":{
+                  "profile_pic": "url",
+                  "full_name": "mina"
+              }
+          }],
+          "is_friend": true,
+          "send_friend_request": true,
+          "mutual_friends": [
+                  {
+                      "full_name": "utshaw"
+                      }
+                  ]
+        }
+        
+### User ride history[Get]
+
+User can see the ride history according to types such as hosted, taken or both
+
++ Headers
+    {
+        "api_key" :"Token ghfsdhb"
+    }
+    
++ Request (application/json)
+    
+    {
+        "user_id" : "78987",
+        "trip_id" : "8990"
+    }
+    
++ Response 200 (application/json)
+    
+    {
+        "map" : "map",
+        "time" : " 11:21 AM",
+        "date" : "30 June, 2018",
+        "fare" : "130tk",
+        "from" : "tejgaon",
+        "to" : "mirpur",
+        "reviews" : {
+            "name" : "saidul",
+            "review" : " very nice person",
+            "rating" : "4.5",
+        }
+        
+        "other_rider" : {
+            "host" : 
+                {
+                    "name" : "saidul",
+                    "rating" : "4.5",
+                    "total_rides_taken" : "34",
+                    "pagination : 1,
+                }
+            "riders" :
+                {
+                    "name" : "mojib",
+                    "rating" : "4.5",
+                    "total_rides_taken" : "34",
+                    "pagination" : 1
+                }
+            "error" : [
+                    {
+                        }
+                    ]
+        }
+    }
+    
+### Facebook verification[Post]
+
+            
+                                        
+        
+        
+        
+
+      
+
+            
         
             
 
@@ -292,7 +400,6 @@ This is for adding a company by an user when s/he gets a new job :D
 
 
 
-#############Rahin ends 16th Oct,2018#########
 
 
             
