@@ -21,11 +21,43 @@ It is  verifying phone number after taking it and returning response as verified
     + Body
 
             {
-                "response" : {
-                    "response_status" : 200,
-                    "response_message" : "Successful"
-                }
+               "response" : {
+                    "status" : 200,
+                    "message" : "Successful",
+                    "success" : "true",
+                    "error" : [{}]
             }
+            
++ Response 400 (application/json)
+ 
+     
+    + Body
+
+            {
+               "response" : {
+                    "status" : "400",
+                    "message" : "Bad Request",
+                    "success" : "false",
+                    "error" : [{
+                    "message" : "Invalid Phone Number"
+                    }]
+            }
+
++ Response 400 (application/json)
+ 
+     
+    + Body
+
+            {
+               "response" : {
+                    "status" : "400",
+                    "message" : "Successful",
+                    "success" : "false",
+                    "error" : [{
+                    "message" : "Phone Number Doesn't Exist"
+                    }]
+            }
+
 
 ### Phone Number Authentication [POST]
 
@@ -33,25 +65,31 @@ This is for authenticating phone number while signing up in the app.
 
 + Request (application/json)
 
-        {
-            "auth_code" : “sda23r34”
-
-        }
+    + Attributes
+        + auth_code (string, required)
+      
+    + Body
+    
+            {
+                "auth_code" : “sda23r34”
+            }
 
 + Response 200 (application/json)
 
-If phone number exists, then response 200_OK and redirect to sign up to create a new user
+If phone number doesn't exist sign up to create a new user
 
     + Body
 
             {
-                
-                "response" : {
-                   " response_status " : 200
-                   " response_message " : " authenticated "
+                "data" : {
+                    "user" : {},
+                    },
                     
-            
-                         } 
+               "response" : {
+                    "status" : "200",
+                    "message" : "Successful",
+                    "success" : "true",
+                    "error" : [{}]
             }
             
 + Response 201 (application/json)
@@ -62,15 +100,28 @@ If phone number exists and has done signup already, then return user information
 
             {
                 "data" : {
-                    "user" : {}
-                
+                "user_profile" : {
+                "user_id" : "d4as867d9waq",
+                "phone_number" : "01735528397",
+                "full_name" : " shuvo champ ",
+                "country_code" : "565",
+                "profile_pic" : "url",
+                "gender" : "male"
+                        },
+                "Favorites" : [{
+                "user_id" : "dsa8d6as8",
+                "name" : "hoime",
+                "location" : "lat/lon",
+                "location_name" : "banani 11"
+                }]
                 },
-                "response" : {
-                   " response_status " : 200
-                   " response_message " : " Authenticated "
-                    
-            
-                         } 
+                     
+               "response" : {
+                    "status" : "200",
+                    "message" : "Successful",
+                    "success" : "true",
+                    "error" : [{}]
+                    },
             }
             
 ### Sign Up [POST]
@@ -93,21 +144,21 @@ This is for an unregistered user to sign up for a new account with a verified ph
         + gender (string, required)
         
         
-    + Body
++ Body
     
-            {
-                "phone_number" : "01735528397"
-                "full_name" : " shuvo champ "
-                "email" : "nightshuvo@gmail.com"
-                "company_email" : "shuvo@bracits.com"
-                "license_number" : "46sa4f86as4fg65wa4f6wa"
-                "country_code" : "565"
-                "fb_id" : "65sa4d65as4d6w4d6w"
-                "birth_date" : "2/3/5689"
-                "license_number" : "4d6s5a4d6as46a"
-                "profile_pic" : "7w9q8e76a5s4d"
+        {
+                "phone_number" : "01735528397",
+                "full_name" : " shuvo champ ",
+                "email" : "nightshuvo@gmail.com",
+                "company_email" : "shuvo@bracits.com",
+                "license_number" : "46sa4f86as4fg65wa4f6wa",
+                "country_code" : "565",
+                "fb_id" : "65sa4d65as4d6w4d6w",
+                "birth_date" : "2/3/5689",
+                "license_number" : "4d6s5a4d6as46a",
+                "profile_pic" : "7w9q8e76a5s4d",
                 "gender" : "male"
-            }
+        }
 
 + Response 200 (application/json)
 
@@ -117,19 +168,30 @@ This is for an unregistered user to sign up for a new account with a verified ph
     
             {
                 "data" : {
-                        "user" : {}
+                "user_profile" : {
+                "user_id" : "d4as867d9waq",
+                "phone_number" : "01735528397",
+                "full_name" : " shuvo champ ",
+                "country_code" : "565",
+                "profile_pic" : "url",
+                "gender" : "male"
+                        },
+                "Favorites" : [{}]
+                },
                     
                     },
-                "response" : {
-                       "response_status" : 200
-                       "response_message" : "authenticated"
-                             } 
+               "response" : {
+                    "status" : "200",
+                    "message" : "Successful",
+                    "success" : "true",
+                    "error" : [{}]
+                    },
             }
             
 
-### View profile[Get]
+### View Host profile[Get]
 
-This is for viewing the profile of any user(how it looks like, what data it contains)
+This is for viewing the profile of host 
 
 + Headers {
     "api_key" : "Token ddsgdsggff"
@@ -137,8 +199,7 @@ This is for viewing the profile of any user(how it looks like, what data it cont
         
 + Request (application/json)
     {
-        "user_id" : "74564"
-        "trip_id" : "76438"
+        "host_id" : "74564",
         
     }
 
@@ -148,8 +209,9 @@ This is for viewing the profile of any user(how it looks like, what data it cont
 
     + Body
     
-        {
-            "user_id" : "74564",
+        {   "data" : {
+            "user_profile" : {
+             "user_id" : "74564",
             "profile_pic" : "url",
             "full_name" : "utshaw",
             "rating" :"4.5",
@@ -159,25 +221,102 @@ This is for viewing the profile of any user(how it looks like, what data it cont
             "is_license_number_verified" : true,
             "is_phone_number_verified" : true,
             "is_email_id_verified" : true,
-            "is_facebook_verified" : true,
+            "is_facebook_verified" : true
+            }
             "user_company" :
                 {
                     "company_id" : "0393",
+                    "company_name" : "google"
                     "is_currently_working" : true,
                     "joined" : "10 July 2018",
                 }
-            hosted_ratings_and_review:
-                {
-                    "from" : "utshaw",
+            rider_review_ratings:
+                [{
+                    "user" : {
+                    "user_id" : "d46waw"
+                    "fullname" : "utsahw",
+                    }
                     "rating" : "4.5",
                     "review" : "Awesome",
-                }
-            error: {
-                [
-                    ]
+                    "date" : "2/3/5846"
+                }]
             }
+           
+          "response" : {
+                    "status" : "200",
+                    "message" : "Successful",
+                    "success" : "true",
+                    "error" : [{}]
+                    },
         }
-            
+        
+### View Rider profile[Get]
+
+This is for viewing the profile of any rider
+
++ Headers {
+    "api_key" : "Token ddsgdsggff"
+        }
+        
++ Request (application/json)
+    {
+        "host_id" : "74564",
+        
+    }
+
+    
+
++ Response 200 (application/json)
+
+    + Body
+    
+        {   "data" : {
+            "user_profile" : {
+             "user_id" : "74564",
+            "profile_pic" : "url",
+            "full_name" : "utshaw",
+            "rating" :"4.5",
+            "number_of_rides_taken" : "33",
+            "number_of_rides_hosted" : "43",
+            "completeness" : "80%"
+            "is_license_number_verified" : true,
+            "is_phone_number_verified" : true,
+            "is_email_id_verified" : true,
+            "is_facebook_verified" : true
+            }
+            "user_company" :
+                {
+                    "company_id" : "0393",
+                    "company_name" : "google"
+                    "is_currently_working" : true,
+                    "joined" : "10 July 2018",
+                }
+            host_review_ratings:
+                [{
+                    "user" : {
+                    "user_id" : "d46waw"
+                    "fullname" : "utsahw",
+                    }
+                    "rating" : "4.5",
+                    "review" : "Awesome",
+                    "date" : "2/3/5846"
+                }]
+                
+                
+            rider_review_ratings:
+                [{
+                    "user" : {
+                    "user_id" : "d46waw"
+                    "fullname" : "utsahw",
+                    }
+                    "rating" : "4.5",
+                    "review" : "Awesome",
+                    "date" : "2/3/5846"
+                }]
+            }
+           
+            error: { [] }
+        }
             
 ### update Profile [PUT] 
 
@@ -195,54 +334,43 @@ This is for viewing the profile of any user(how it looks like, what data it cont
             "fb_id" : "facebook.com/teekhikheer",
             "personal_email" : "meethachuri@apple.com",
             "birth_date" : "26.01.1900",
-            "license_number" : "846398463905",
             "gender" : "male/female",
             "office_start_time" : "8:00",
             "office_end_time" : "16:00",
-            "phone_number" : "01911232222",
-            "vehicle_type" : "nissan",
             "country_code" : "BD-007",
-            "home_address" : "hemayetpur",
-            "user_company" : {
-                "company_name" : "BITS",
-                "company_email" : "bits@bracits.com",
-                "company_address" : "niketan",
-            }
+           
         }
         
 + Response (application/json)
     
         { 
-            "status" : "200",
-            "message" : "successfully updated",
-            "success" : true,
-            "error" : {
-                [
-                    ]
-                {
-            "data" : { 
+           
+            "data" : { "user_id" : "hiou74564634",
                         "full_name" : "razib",
                         "profile_pic" : "url",
                         "fb_id" : "facebook.com/teekhikheer",
                         "personal_email" : "meethachuri@apple.com",
                         "birth_date" : "26.01.1900",
-                        "license_number" : "846398463905",
                         "gender" : "male/female",
                         "office_start_time" : "8:00",
                         "office_end_time" : "16:00",
                         "phone_number" : "01911232222",
-                        "vehicle_type" : "nissan",
                         "country_code" : "BD-007",
-                        "home_address" : "hemayetpur",
-                        "user_company" : {
-                            "company_name" : "BITS",
-                            "company_email" : "bits@bracits.com",
-                            "company_address" : "niketan"
-                    }
+                        "joining_date" : "2/3/2015"
+                         }
+                         
+                          "response" : {
+                    "status" : "200",
+                    "message" : "Successful",
+                    "success" : "true",
+                    "error" : [{}]
+                    },
+                         
+                         }
                     
 ### Add request company [Post] 
             
-This is for adding a company by an user when s/he gets a new job :D
+This is for adding a company by an user if it doesn't exist in DB
 
 + Headers
     {
@@ -264,13 +392,14 @@ This is for adding a company by an user when s/he gets a new job :D
     + Body
     
             {
-                "status" : 200,
-                "message" : "successfully added",
-                "success" : true
-                "error" : [
-                    {
-                        }
-                    ]
+                "data" : {},
+            
+                 "response" : {
+                    "status" : "200",
+                    "message" : "Successful",
+                    "success" : "true",
+                    "error" : [{}]
+                    },
             }
             
 ### View friend list [Get]
@@ -291,34 +420,45 @@ This is for the users to see their friends list, wo are in the list
 + Response 200 (application/json)
 
         {
-                
-          "profile_pic":"url",
-          "full_name":"razib",
-          "rating":"4.5",
-          "number_of_rides":"4",
-          "is_phone_number_verified": true,
-          "is_email_address":true
-          "is_company_name": true,
-          "joining_date": "201-10-2018",
-          "reviews":[{
-              "desc": "too good",
-              "date": "223.10.2018018-09-09",
-              "rating": "4.5",
-              "reviewer":{
-                  "profile_pic": "url",
-                  "full_name": "mina"
-              }
-          }],
-          "is_friend": true,
-          "send_friend_request": true,
-          "mutual_friends": [
-                  {
-                      "full_name": "utshaw"
-                      }
-                  ]
+            "data" : {
+            "user" : [{
+            "user_id" : "sdf654s65df",
+            "fullname" : "raizd",
+            "ratings" : "4.5",
+            "no_of_rides_taken" : 56,
+             "user_company" :
+                {
+                    "company_id" : "0393",
+                    "company_name" : "google"
+                    "is_currently_working" : true,
+                    "joined" : "10 July 2018",
+                },
+            },
+            {
+            "user_id" : "sdf654s65df",
+            "fullname" : "raizd",
+            "ratings" : "4.5",
+            "no_of_rides_taken" : 56,
+             "user_company" :
+                {
+                    "company_id" : "0393",
+                    "company_name" : "google"
+                    "is_currently_working" : true,
+                    "joined" : "10 July 2018",
+                },
+            }] ,
+            },
+           
+           "response" : {
+                    "status" : "200",
+                    "message" : "Successful",
+                    "success" : "true",
+                    "error" : [{}]
+                    },
+            
         }
         
-### User ride history[Get]
+### User taken ride history[Get]
 
 User can see the ride history according to types such as hosted, taken or both
 
@@ -331,77 +471,175 @@ User can see the ride history according to types such as hosted, taken or both
     
     {
         "user_id" : "78987",
-        "trip_id" : "8990"
+       
     }
     
 + Response 200 (application/json)
     
     {
-        "map" : "map",
-        "time" : " 11:21 AM",
-        "date" : "30 June, 2018",
-        "fare" : "130tk",
-        "from" : "tejgaon",
-        "to" : "mirpur",
-        "reviews" : {
-            "name" : "saidul",
-            "review" : " very nice person",
-            "rating" : "4.5",
-        }
-        
-        "other_rider" : {
-            "host" : 
-                {
-                    "name" : "saidul",
-                    "rating" : "4.5",
-                    "total_rides_taken" : "34",
-                    "pagination : 1,
-                }
-            "riders" :
-                {
-                    "name" : "mojib",
-                    "rating" : "4.5",
-                    "total_rides_taken" : "34",
-                    "pagination" : 1
-                }
-            "error" : [
-                    {
-                        }
-                    ]
-        }
+      "data" : {
+      "trip_members" : 
+      [{
+      "trip_id" : "7e6wr6w",
+      "pickup_location" : "lat/long",
+      "pickup_location_name" : "niketon",
+      "final_drop_location" : "lat/long",
+      "final_drop_location_name" : "uttara",
+      "join_time" : "4:30 2/8/2019",
+      "fare" : "30"
+      
+      },
+      {
+      "trip_id" : "7e6wr6w",
+      "pickup_location" : "lat/long",
+      "pickup_location_name" : "niketon",
+      "final_drop_location" : "lat/long",
+      "final_drop_location_name" : "uttara",
+      "join_time" : "4:30 2/8/2019",
+      "fare" : "30"
+      
+      }],
+      },
+        "response" : {
+                    "status" : "200",
+                    "message" : "Successful",
+                    "success" : "true",
+                    "error" : [{}]
+                    },
     }
+    
+           
+### User hosted ride history[Get]
+
+User can see the ride history according to types such as hosted, taken or both
+
++ Headers
+    {
+        "api_key" :"Token ghfsdhb"
+    }
+    
++ Request (application/json)
+    
+    {
+        "user_id" : "78987",
+       
+    }
+    
++ Response 200 (application/json)
+    
+
+    {
+      "data" : {
+      "trip" : 
+      [{
+      "trip_id" : "7e6wr6w",
+      "start_location" : "lat/long",
+      "start_location_name" : "niketon",
+      "final_end_location" : "lat/long",
+      "final_end_location_name" : "uttara",
+      "start_time" : "4:30 2/8/2019",
+      "fare" : "30"
+      },
+      {
+      "trip_id" : "7e6wr6w",
+      "start_location" : "lat/long",
+      "start_location_name" : "niketon",
+      "final_end_location" : "lat/long",
+      "final_end_location_name" : "uttara",
+      "start_time" : "4:30 2/8/2019",
+      "fare" : "30"
+      }],
+      
+    "response" : {
+                    "status" : "200",
+                    "message" : "Successful",
+                    "success" : "true",
+                    "error" : [{}]
+                    },
+    }
+    
     
 ### Facebook verification[Post]
 
++ Request (application/json)
+
+    + Attributes
+        + fb_id (string, required)
+        
+        
+    + Body
+    
+            {
+                "fb_id" : "4d6s5a4d6as46a"
+                "user_id" : "d46aw"
+            }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+    
+            {
+            "data" : {},
             
-                                        
-        
-        
-        
-
-      
-
+                "response" : {
+                    "status" : "200",
+                    "message" : "Successful",
+                    "success" : "true",
+                    "error" : [{}]
+                    },
+            }
             
-        
++ Response 409 (application/json)
+
+   Already exists license
+
+    + Body
+    
+            {
+                 "response" : {
+                    "status" : "409",
+                    "message" : "Conflict",
+                    "success" : "false",
+                    "error" : [{
+                    "message" : "fb_id already exists"}]
+                    },
+            }
+
++ Response 400 (application/json)
+
+   Invalid fb_id
+
+    + Body
+    
+            {
+                 "response" : {
+                    "status" : "400",
+                    "message" : "Bad Request",
+                    "success" : "false",
+                    "error" : [{
+                    "message" : "Id invalid"}]
+                    },
+            }
             
++ Response 404 (application/json)
 
+   fb_id doesn't exist
 
+    + Body
+    
+            {
+                 "response" : {
+                    "status" : "404",
+                    "message" : "Not found",
+                    "success" : "false",
+                    "error" : [{
+                    "message" : "Id  doesn't exist"}]
+                    },
+            }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+           
             
 ### License verification [POST]
 
@@ -417,6 +655,7 @@ This is for an unregistered user to sign up for a new account with a verified ph
     
             {
                 "license_number" : "4d6s5a4d6as46a"
+                "user_id" : "d46aw"
             }
 
 + Response 200 (application/json)
@@ -426,10 +665,14 @@ This is for an unregistered user to sign up for a new account with a verified ph
     + Body
     
             {
+            "data" : {},
+            
                 "response" : {
-                       "response_status" : 200
-                       "response_message" : "valid"
-                             } 
+                    "status" : "200",
+                    "message" : "Successful",
+                    "success" : "true",
+                    "error" : [{}]
+                    },
             }
             
 + Response 409 (application/json)
@@ -439,24 +682,47 @@ This is for an unregistered user to sign up for a new account with a verified ph
     + Body
     
             {
-                "response" : {
-                       "response_status" : 409
-                       "response_message" : "Already Exists"
-                             } 
+                 "response" : {
+                    "status" : "409",
+                    "message" : "Conflict",
+                    "success" : "false",
+                    "error" : [{
+                    "message" : "license already exists"}]
+                    },
             }
 
-+ Response 401 (application/json)
++ Response 400 (application/json)
 
    Invalid license
 
     + Body
     
             {
-                "response" : {
-                       "response_status" : 401
-                       "response_message" : "Invalid License"
-                             } 
+                 "response" : {
+                    "status" : "400",
+                    "message" : "Conflict",
+                    "success" : "false",
+                    "error" : [{
+                    "message" : "license Invalid"}]
+                    },
             }
+            
++ Response 404 (application/json)
+
+   license doesn't exist
+
+    + Body
+    
+            {
+                 "response" : {
+                    "status" : "404",
+                    "message" : "Not found",
+                    "success" : "false",
+                    "error" : [{
+                    "message" : "license  doesn't exist"}]
+                    },
+            }
+
 
             
 ### Logout User [POST]
@@ -477,8 +743,12 @@ This is for an unregistered user to sign up for a new account with a verified ph
     + Body
 
             {
-            "success": true
-            "message": "Successfully logout you."
+            "response" : {
+                    "status" : "200",
+                    "message" : "successful",
+                    "success" : "true",
+                    "error" : [{}]
+                    },
             }
 
 ### Find Trip [GET]
@@ -492,10 +762,12 @@ This is for an unregistered user to sign up for a new account with a verified ph
         {
             "time":"5:30 PM",
             "date":"2018-08-02",
-            "vehicle_type":"car/cng/bike/any",
+            "pickup_location":"car/cng/bike/any",
+            "pickup_location_name" : "uttata"
             "seat":"5",
-            "source":"lat/lng",
-            "destination":"lat/lng"
+            "drop_location":"car/cng/bike/any",
+            "drop_location_name":"uttata",
+            "vehicle_type":"2"
         }
 
 + Response 200 (application/json)
@@ -504,23 +776,37 @@ This is for an unregistered user to sign up for a new account with a verified ph
 
     + Body
 
-            [{
-            "results": {
-                "from":"niketan",
-                "to":"uttara",
-                "time":"12:30",
+            {
+            "data" : {
+            
+            
+            "trip": [{
+                "start_location":"lat/lon",
+                "start_location_name":"niketan",
+                "end_location":"lat/lon",
+                "end_location_name":"uttara",
+                "start_time":"12:30",
                 "date":"2018-09-09",
                 "price_per_seat":"123",
                 "user":{
+                    "user_id" : "e4rw654r3",
                     "full_name":"raju mazumder",
                     "rating":"4.5",
                     "number_of_rides":"4"
-                }
-              },
+                },
+              }],
               "count": 100,
               "next":"2",
               "prev":"1"
-            }]
+            },
+            
+             "response" : {
+                    "status" : "200",
+                    "message" : "successful",
+                    "success" : "true",
+                    "error" : [{}]
+                    },
+            }
             
 ### Trip Details [GET]
 
@@ -584,59 +870,11 @@ This is for an unregistered user to sign up for a new account with a verified ph
             "time": "4:50 PM",
             "date": "2018-09-09"
            }
-           
-### Triper Details [GET]
+ 
+        
 
-+ Headers
-    {
-        "api_key":"Token dgsdgdsgds"
-    }
-+ Request (application/json)
-
-        {
-            "trip_id":"898jjhh"
-        }
-
-+ Response 200 (application/json)
-
-   
-
-    + Body
-
-           {
-                "profile_pic":"url",
-                "full_name":"raju mazumder",
-                "rating":"4.5",
-                "number_of_rides":"4",
-                "is_phone_number_verified": true,
-                "is_email_address":true
-                "is_company_name": true,
-                "joining_date": "2018-09-09",
-                "reviews":[{
-                    "desc": "test review",
-                    "date": "2018-09-09",
-                    "rating": "4.5",
-                    "reviewer":{
-                        "profile_pic": "url",
-                        "full_name": "raju mazumder"
-                    }
-                }],
-                "is_friend": true,
-                "send_friend_request": true,
-                "mutual_friends": [
-                        {
-                            "full_name": "raju mazumder"
-                            }
-                        ]
-            }
-            
-      
-            
-
-
-
-### View amenities [Put]
-user : admin,regular
+### View amenities [Get]
+user : regular
 + Headers
     {
         "api_key":"Token dgsdgdsgds"
@@ -666,7 +904,7 @@ user : admin,regular
             "response" : { 
             "status" : "200",
             "success": "true",
-            "message": "Successfully added",
+            "message": "Successfully",
             "error" : [{}]
             }
            
@@ -741,8 +979,15 @@ user : admin
     + Body
 
             {
-            "success": true,
-            "message": "Successfully modified"
+            
+            
+            
+             "response" : { 
+            "status" : "200",
+            "success": "true",
+            "message": "successful",
+            "error" : [{}]
+            }
             },
             
 
@@ -755,13 +1000,55 @@ user : admin
 + Request (application/json)
 
         {
-            "data" : {
-            "trip" : {
+           
+            
              "time":"4:50 PM",
             "date":"2018-09-09",
-            "from": "niketan",
-            "to": "uttara",
-            "vehicle_type": "car",
+            "start_location_name": "niketan",
+             "start_location": "lat/lon",
+            "end_location_name": "uttara",
+              "end_location": "lat/lon",
+            "vehicle_type": "2",
+            "personal": "yes/no",
+            "is_ac": true,
+            "is_music": true,
+            "is_smoking": true,
+            "number_of_seat": "4",
+            "price_per_seat": "120",
+            "accept_auto": true,
+            "need_confirmation": true,
+            
+            
+            "amenities" : [
+            {
+            "amenity_id" : "1"
+            },
+            {
+            "amenity_id" : "2"
+            },
+            ],
+            
+            
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            {
+            
+             "data" : {
+            "trip" : {
+            "trip_id" : "d54we68qw",
+             "time":"4:50 PM",
+            "date":"2018-09-09",
+            "start_location_name": "niketan",
+             "start_location": "lat/lon",
+            "end_location_name": "uttara",
+              "end_location": "lat/lon",
+            "vehicle_type": "2",
             "personal": "yes/no",
             "is_ac": true,
             "is_music": true,
@@ -782,19 +1069,13 @@ user : admin
             ]
             
             },
-           
             
-        }
-
-+ Response 200 (application/json)
-
-   
-
-    + Body
-
-            {
-            "success": true,
-            "message": "Successfully created"
+              "response" : { 
+            "status" : "200",
+            "success": "true",
+            "message": "successful",
+            "error" : [{}]
+            }
             }
                         
 
@@ -808,13 +1089,14 @@ user : admin
 + Request (application/json)
 
         {
-            "data" : {
-            "trip" : {
+          
             "trip_id" : "a5sd69a6s",
              "time":"4:50 PM",
             "date":"2018-09-09",
-            "from": "niketan",
-            "to": "uttara",
+          "start_location_name": "niketan",
+             "start_location": "lat/lon",
+            "end_location_name": "uttara",
+              "end_location": "lat/lon",
             "vehicle_type": "car",
             "personal": "yes/no",
             "is_ac": true,
@@ -823,9 +1105,8 @@ user : admin
             "number_of_seat": "4",
             "price_per_seat": "120",
             "accept_auto": true,
-            "need_confirmation": true
-            },
-            
+            "need_confirmation": true,
+           
             "amenities" : [
             {
             "amenity_id" : "1"
@@ -835,7 +1116,7 @@ user : admin
             },
             ]
             
-            },
+           
            
             
         }
@@ -876,6 +1157,7 @@ user : admin
             }]
             }
 
+//complete till here
 
 
 ### View All Trip Requests [Get]
