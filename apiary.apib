@@ -238,12 +238,43 @@ This is for viewing the profile of any user(how it looks like, what data it cont
                         "user_company" : {
                             "company_name" : "BITS",
                             "company_email" : "bits@bracits.com",
-                            "company_address" : "niketan",
+                            "company_address" : "niketan"
                     }
                     
 ### Add request company[Post] 
             
+This is for adding a company by an user when s/he gets a new job :D
 
++ Headers
+    {
+        "api_key" : "Token gfhjfh"
+    }
+    
++ Request (application/json)
+        {
+            "company_name" : "bits",
+            "phone_number" : "01735680276",
+            "address" : "Tejgaon Link Road",
+            "location" : "lat/lng",
+            "location_name" : "niketan/gulshan",
+            "company_email" : "bits@bracits.com"
+        }
+        
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "status" : 200,
+                "message" : "successfully added",
+                "success" : true
+                "error" : [
+                    {
+                        }
+                    ]
+            }
+            
+        
             
 
 
