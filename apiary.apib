@@ -1802,11 +1802,8 @@ user : trip_host
 + Request (application/json)
 
         {
-            "company_name" : "Brac Bank Ltd.",
-            "phone_number" : 01676868564,
-            "address" : "34/A niketan, dhaka",
-            "location" : "30.23423/23.23434",
-            "company_email" : "bits@bracits.com"
+            "company_id" : "4dfe6d46w",
+           "user_id" : "d4s64dwq"
         }
 
 + Response 200 (application/json)
@@ -1817,15 +1814,21 @@ user : trip_host
 
             {
                 "data" :{
-                    "company_name" : "Brac Bank Ltd.",
+                "company" : [{
+                 "company_name" : "Brac Bank Ltd.",
+                 "company_id" : "dailejw",
                     "phone_number" : 01676868564,
                     "address" : "34/A niketan, dhaka",
                     "location" : "30.23423/23.23434",
                     "company_email" : "bits@bracits.com"
+                }],
+                   
                 },
-                "response" : {
-                    "response_status" : 200,
-                    "response_message" : "Successful"
+                "response" : { 
+                    "status" : "200",
+                    "success": "true",
+                    "message": "Successful",
+                    "error" : [{}]
                 }
             }
             
@@ -1849,19 +1852,27 @@ Here user will see the list of pending friends request
     + Body
     
             {
-                "pending_list": [{
-                    "user" : [{
-                                "profile_pic":"url",
-                                "full_name":"utshaw",
-                                "rating":"4.5",
-                            }]
-                                }]
-                        
-                    "mutual_friends": [
+                "data": {
+                    "friends" : [{
+                                "from":"d56qwe6wq",
+                                "to":"46qwe4qw",
+                                "status":"pending",
+                            
+                            "mutual_friends": [
                             {
+                                "user_id" : "4as56d46aw"
                                 "full_name": "raju mazumder"
                                 }
-                            ]
+                            ],
+                            
+                            }],
+                           "response" : { 
+                    "status" : "200",
+                    "success": "true",
+                    "message": "Successful",
+                    "error" : [{}]       
+                        
+                    
                         
             }
 
@@ -1876,7 +1887,8 @@ Here user will see the list of pending friends request
 
         {
             "email" : "sdad@gmail.com",
-            
+            "user_id" : "e4r6w4e"
+
         }
 
 + Response 200 (application/json)
@@ -2034,7 +2046,7 @@ Here user will see the list of pending friends request
                     "error" : [{}]
                 }
             }
-
+///what to return 
 ### Send friend request[Post]
 
 + Headers
@@ -2066,7 +2078,7 @@ Here user will see the list of pending friends request
                 }
             }
 
-+ Response 200 (application/json)
++ Response 401 (application/json)
 
    
 
@@ -2075,8 +2087,8 @@ Here user will see the list of pending friends request
             {
                 "data" :{},
                 "response" : {
-                    "status" : 200,
-                    "message" : "Successful",
+                    "status" : 401,
+                    "message" : "Unauthorized",
                     "success" : "false",
                     "error" : [{
                     "message" : "Can not send friend rquest"}]
@@ -2084,7 +2096,7 @@ Here user will see the list of pending friends request
             }
 
 
-### Accept/Block/unfriend friend [Post]
+### Accept/Block/unblock/unfriend friend [Post]
 
 + Headers
     {
@@ -2115,11 +2127,31 @@ Here user will see the list of pending friends request
                 }
             }
 
+
++ Response 409 (application/json)
+
+   
+
+    + Body
+
+            {
+                "data" :{},
+                "response" : {
+                    "status" : 409,
+                    "message" : "Conflict",
+                    "success" : "false",
+                    "error" : [{
+                    "message" : "Request already processed"
+                    }]
+                }
+            }
+
+
 ### View Friend request[Get]
 
 + Headers
     {
-        "api_key":"Token dgsdgdsgds"
+        "api_key" : "Token dgsdgdsgds"
     }
     
 + Request (application/json)
@@ -2139,9 +2171,15 @@ Here user will see the list of pending friends request
             {
                 "data" :{
                 "friend" [
-                {"user_id"},
-                {"user_id"},
-                {"user_id"}
+                {"from" : "myid",
+                "to" : "djwjeowi"
+                },
+                {"from" : "myid",
+                "to" : "djwjeowi"
+                },
+                {"from" : "myid",
+                "to" : "djwjeowi"
+                }
                 ]
                 },
                 "response" : {
@@ -2153,7 +2191,7 @@ Here user will see the list of pending friends request
             }
 
 
-### Report[Get]
+### Report[post]
 
 + Headers
     {
@@ -2165,7 +2203,7 @@ Here user will see the list of pending friends request
         {
            "from_id" : "d485a47d6as",
            "to_id",
-           "report_id" : "3",
+           
             "report_message" : "abusive language"
         }
 
