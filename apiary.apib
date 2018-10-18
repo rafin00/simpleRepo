@@ -1425,7 +1425,7 @@ user : trip_host
 + Request (application/json)
 
         {
-            "user_id" : "4as5d4a6"
+            "host_id" : "4as5d4a6"
             "trip_id" : "d4as5d"
         },
 
@@ -1436,26 +1436,24 @@ user : trip_host
 
         {
         
-        "data" : {
-            "total_earning" : 564,
-            "rating" : 5,
-            "trip_members" : 
-            [{
-                "user_id" : "4fewr6",
-                "full_name" : "hasan",
-                "pay_amount" : 45
-            }]
+            "data" : {
+                "total_earning" : 564,
+                "rating" : 5,
+                "trip_members" :[
+                    {
+                        "user_id" : "4fewr6",
+                        "full_name" : "hasan",
+                        "pay_amount" : 45
+                    }
+                ]
 
-        },
-
-          "response" : { 
-            "status" : "200",
-            "success": "true",
-            "message": "Successfull",
-            "error" : [{}]
             },
-          
-           
+            "response" : { 
+                "status" : "200",
+                "success": "true",
+                "message": "Tris has been ended",
+                "error" : [{}]
+                },
         },
         
 + Response 412 (application/json)
@@ -1463,17 +1461,17 @@ user : trip_host
     + Body
 
         {
-        
             "response" : { 
-            "status" : "412",
-            "success": "false",
-            "message": "Precondition Failed",
-            "error" : [{
-            "msg" : "Can't end trip with trip members existing"
-            }]
+                "status" : "412",
+                "success": "false",
+                "message": "Precondition Failed",
+                "error" : [
+                    {
+                        "message" : "Can't end trip with trip members on trip status"
+                    }
+                ]
             },
-           
-        },
+        }
 
 + Response 401 (application/json)
 
@@ -1482,14 +1480,16 @@ user : trip_host
         {
         
            "response" : { 
-            "status" : "401",
-            "success": "false",
-            "message": "Unauthorized",
-            "error" : [{
-            "msg" : "Only host can end trip"
-            }]
+                "status" : "401",
+                "success": "false",
+                "message": "Unauthorized",
+                "error" : [
+                    {
+                        "message" : "Only host can end trip"
+                    }
+                ]
             },
-        },       
+        }       
         
 ### Review and rating [post]
 
