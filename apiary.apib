@@ -1108,12 +1108,12 @@ user : admin
     {
         "api_key":"Token dgsdgdsgds"
     }
+
 + Request (application/json)
 
         {
            "trip_id" : "d486w564aw",
-           "user_id" : "8e67rw8",
-          
+           "host_id" : "8e67rw8",
         }
 
 + Response 200 (application/json)
@@ -1125,18 +1125,15 @@ user : admin
             {
             
                 "data" : {
-             "trip_id: "r4e6w",      
-            "status" : "onroute"
-            },
-            
-           
-            
-             "response" : { 
-            "status" : "200",
-            "success": "true",
-            "message": "Successfull",
-            "error" : [{}]
-            },
+                    "trip_id: "r4e6w",      
+                    "status" : "onroute"
+                    },
+                "response" : { 
+                    "status" : "200",
+                    "success": "true",
+                    "message": "Trip has been started",
+                    "error" : [{}]
+                    },
             }
 
 
@@ -1149,21 +1146,17 @@ user : admin
             {
             
                 "data" : {
-             "trip_id: "r4e6w",      
-            "status" : "not-onroute"
-            },
-            
-            
-           
-            
-             "response" : { 
-            "status" : "412",
-            "success": "false",
-            "message": "Successfull",
-            "error" : [{
-            "messsage" : "You need atleast 1 accepted trip member"
-            }]
-            },
+                    "trip_id: "r4e6w",      
+                    "status" : "not-onroute"
+                },
+                "response" : { 
+                    "status" : "412",
+                    "success": "false",
+                    "message": "Trip is not started",
+                    "error" : [{
+                        "messsage" : "You need atleast one rider to start the trip"
+                    }]
+                },
             }
              
 
@@ -1173,6 +1166,7 @@ user : admin
     {
         "api_key":"Token dgsdgdsgds"
     }
+
 + Request (application/json)
 
         {
@@ -1190,28 +1184,24 @@ user : admin
             {
             
                 "data" : {
-                "trip_request" : {
-                "trip_request_id" : "fse545"
-                 "trip_id: "r4e6w",      
-            "request_timedate" : "2/3/4056",
-            "status" : "not-onroute",
-            "source_location" : "lat/long",
-            "source_location_name" : "niketon",
-            "destination_location" : "lat/long",
-            "destination_location_name" : "mohakhali",
-            "number_of_seat" : 2
-                },
-            
-            },
-            
-           
-            
-             "response" : { 
-            "status" : "200",
-            "success": "true",
-            "message": "Successfull",
-            "error" : [{}]
-            },
+                    "trip_request" : {
+                        "trip_request_id" : "fse545",
+                        "trip_id: "r4e6w",      
+                        "request_timedate" : "30-10-2018",
+                        "status" : "not-onroute",
+                        "source_location" : "lat/long",
+                        "source_location_name" : "niketon",
+                        "destination_location" : "lat/long",
+                        "destination_location_name" : "mohakhali",
+                        "number_of_seat" : 2
+                        },
+                    },
+                "response" : { 
+                    "status" : "200",
+                    "success": "true",
+                    "message": "Request is sent",
+                    "error" : [{}]
+                    },
             }
 
 
@@ -1320,7 +1310,7 @@ user : admin
             }
 
 
-### Cancel Trip [Delete]
+### Cancel Trip [Put]
 
 + Headers
     {
@@ -1331,8 +1321,7 @@ user : admin
         {
           
             "trip_id" : "a5sd69a6s",
-            "user_id" : "ad5wa9wq"
-            
+            "host_id" : "ad5wa9wq"
         }
 
 + Response 200 (application/json)
@@ -1342,14 +1331,16 @@ user : admin
     + Body
 
             {
-            
-            "data" : {},
-            
+                "data" : {
+                    "trip_id" : "a5sd69a6s",
+                    "trip_status" : "cancelled"
+                },
+                
                 "response" : { 
-            "status" : "200",
-            "success": "true",
-            "message": "Successfully modified",
-            "error" : [{}]
+                "status" : "200",
+                "success": "true",
+                "message": "Trip is cancelled",
+                "error" : [{}]
             }
 
 
@@ -1361,68 +1352,15 @@ user : admin
 
             {
             
-            "data" : {},
-            
+                "data" : {},
+                
                 "response" : { 
-            "status" : "412",
-            "success": "false",
-            "message": "Cant cancel with members ontrip",
-            "error" : [{}]
+                    "status" : "412",
+                    "success": "false",
+                    "message": "Cannot cancel with members ontrip",
+                    "error" : [{}]
+                    }
             }
-
-
-### Cancel Trip Request [Delete]
-
-+ Headers
-    {
-        "api_key":"Token dgsdgdsgds"
-    }
-+ Request (application/json)
-
-        {
-          
-            "trip_request_id" : "a5sd69a6s",
-            "user_id" : "ad5wa9wq"
-            
-        }
-
-+ Response 200 (application/json)
-
-   
-
-    + Body
-
-            {
-            
-            "data" : {},
-            
-                "response" : { 
-            "status" : "200",
-            "success": "true",
-            "message": "Successfully modified",
-            "error" : [{}]
-            }
-
-+ Response 412 (application/json)
-
-   
-
-    + Body
-
-            {
-            
-            "data" : {},
-            
-                "response" : { 
-            "status" : 412,
-            "success": "false",
-            "message": "Can't cancel while ontrip",
-            "error" : [{}]
-            }
-
-
-
-
 
 ### View All Trip Requests [Get]
 
@@ -1755,16 +1693,16 @@ user : trip_host
             },
         }       
         
-### Review and rating [post]
+### Give Review and rating [post]
 
 + Request (application/json)
 
         {
-            "from_id" : "4as5d4a6",
-            "to_id" : "4as5d4a6",
-            "trip_id" : "d4as5d"
+            "from_id" : "user_id",
+            "to_id" : "host_id",
+            "trip_id" : "d4as5d",
             "rating" : "5",
-            "review" : "veru good"
+            "review" : "very good"
         },
 
 
@@ -1773,14 +1711,15 @@ user : trip_host
     + Body
 
         {
-         "response" : { 
-            "status" : "200",
-            "success": "true",
-            "message": "successful",
-            "error" : [{}]
-            },
-         
-          
+            "data" : {
+                
+            }
+            "response" : { 
+                "status" : "200",
+                "success": "true",
+                "message": "successful",
+                "error" : [{}]
+                },
         },
         
 
