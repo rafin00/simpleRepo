@@ -1476,9 +1476,8 @@ user : trip_host
         {
             "user_id":"442355",
             "trip_id":"dsgid",
-            "rider_id" : "4a6sd46asd46",
-            "satus" : "dropped"
-            
+            "host_id" : "4a6sd46asd46",
+            "status" : "dropped"
         }
 
 + Response 200 (application/json)
@@ -1489,15 +1488,16 @@ user : trip_host
 
            {
            
-           "fare" : "30"
-           
-             {
-                 "response" : { 
+                
+                "data" : {
+                    "trip_fare" : "30"
+                },
+                "response" : { 
                     "status" : "200",
                     "success": "true",
                     "message": "successful",
                     "error" : [{}]
-            },
+                    }
            
            }
  
