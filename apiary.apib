@@ -1101,7 +1101,145 @@ user : admin
                 "error" : [{}]
                 }
             }
-                        
+
+### Start Trip [PUT]
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
++ Request (application/json)
+
+        {
+           "trip_id" : "d486w564aw",
+           "user_id" : "8e67rw8",
+          
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            {
+            
+                "data" : {
+             "trip_id: "r4e6w",      
+            "status" : "onroute"
+            },
+            
+           
+            
+             "response" : { 
+            "status" : "200",
+            "success": "true",
+            "message": "Successfull",
+            "error" : [{}]
+            },
+            }
+
+
++ Response 412 (application/json)
+
+   
+
+    + Body
+
+            {
+            
+                "data" : {
+             "trip_id: "r4e6w",      
+            "status" : "not-onroute"
+            },
+            
+            
+           
+            
+             "response" : { 
+            "status" : "412",
+            "success": "false",
+            "message": "Successfull",
+            "error" : [{
+            "messsage" : "You need atleast 1 accepted trip member"
+            }]
+            },
+            }
+             
+
+### Send Trip Request [POST]
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
++ Request (application/json)
+
+        {
+           "trip_id" : "d486w564aw",
+           "user_id" : "8e67rw8",
+          
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            {
+            
+                "data" : {
+                "trip_request" : {
+                "trip_request_id" : "fse545"
+                 "trip_id: "r4e6w",      
+            "request_timedate" : "2/3/4056",
+            "status" : "not-onroute",
+            "source_location" : "lat/long",
+            "source_location_name" : "niketon",
+            "destination_location" : "lat/long",
+            "destination_location_name" : "mohakhali",
+            "number_of_seat" : 2
+                },
+            
+            },
+            
+           
+            
+             "response" : { 
+            "status" : "200",
+            "success": "true",
+            "message": "Successfull",
+            "error" : [{}]
+            },
+            }
+
+
++ Response 412 (application/json)
+
+   
+
+    + Body
+
+            {
+            
+                "data" : {
+              
+                },
+            
+            },
+            
+           
+            
+             "response" : { 
+            "status" : "412",
+            "success": "false",
+            "message": "Precondition Failed",
+            "error" : [{
+            "message" : "Ride already started"
+            }]
+            },
+            }
 
 
 ### Edit Trip [Put]
@@ -1180,6 +1318,108 @@ user : admin
             "msg" : "can't edit a already started trip"
             }]
             }
+
+
+### Cancel Trip [Delete]
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
++ Request (application/json)
+
+        {
+          
+            "trip_id" : "a5sd69a6s",
+            "user_id" : "ad5wa9wq"
+            
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            {
+            
+            "data" : {},
+            
+                "response" : { 
+            "status" : "200",
+            "success": "true",
+            "message": "Successfully modified",
+            "error" : [{}]
+            }
+
+
++ Response 412 (application/json)
+
+   
+
+    + Body
+
+            {
+            
+            "data" : {},
+            
+                "response" : { 
+            "status" : "412",
+            "success": "false",
+            "message": "Cant cancel with members ontrip",
+            "error" : [{}]
+            }
+
+
+### Cancel Trip Request [Delete]
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
++ Request (application/json)
+
+        {
+          
+            "trip_request_id" : "a5sd69a6s",
+            "user_id" : "ad5wa9wq"
+            
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            {
+            
+            "data" : {},
+            
+                "response" : { 
+            "status" : "200",
+            "success": "true",
+            "message": "Successfully modified",
+            "error" : [{}]
+            }
+
++ Response 412 (application/json)
+
+   
+
+    + Body
+
+            {
+            
+            "data" : {},
+            
+                "response" : { 
+            "status" : 412,
+            "success": "false",
+            "message": "Can't cancel while ontrip",
+            "error" : [{}]
+            }
+
 
 
 
@@ -1402,7 +1642,7 @@ user : trip_host
            
         },
         <!--
-### See trip Members Map [Get]
+### View Trip [Get]
 
 + Request (application/json)
 
