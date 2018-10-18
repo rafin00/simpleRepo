@@ -404,7 +404,7 @@ This is for adding a company by an user if it doesn't exist in DB
             
 ### View friend list [Get]
 
-This is for the users to see their friends list, wo are in the list
+This is for the users to see their friends list, who are in the list
 
 + Headers
         { 
@@ -458,7 +458,7 @@ This is for the users to see their friends list, wo are in the list
             
         }
         
-### User taken ride history[Get]
+### User ride history[Get]
 
 User can see the ride history according to types such as hosted, taken or both
 
@@ -477,35 +477,35 @@ User can see the ride history according to types such as hosted, taken or both
 + Response 200 (application/json)
     
     {
-      "data" : {
-      "trip_members" : 
-      [{
-      "trip_id" : "7e6wr6w",
-      "pickup_location" : "lat/long",
-      "pickup_location_name" : "niketon",
-      "final_drop_location" : "lat/long",
-      "final_drop_location_name" : "uttara",
-      "join_time" : "4:30 2/8/2019",
-      "fare" : "30"
-      
-      },
-      {
-      "trip_id" : "7e6wr6w",
-      "pickup_location" : "lat/long",
-      "pickup_location_name" : "niketon",
-      "final_drop_location" : "lat/long",
-      "final_drop_location_name" : "uttara",
-      "join_time" : "4:30 2/8/2019",
-      "fare" : "30"
-      
-      }],
-      },
+        "data" : {
+            "trip_members" : 
+            [{
+            "trip_id" : "7e6wr6w",
+            "pickup_location" : "lat/long",
+            "pickup_location_name" : "niketon",
+            "final_drop_location" : "lat/long",
+            "final_drop_location_name" : "uttara",
+            "join_time" : "4:30 2/8/2019",
+            "fare" : "30"
+            
+            },
+            {
+            "trip_id" : "7e6wr6w",
+            "pickup_location" : "lat/long",
+            "pickup_location_name" : "niketon",
+            "final_drop_location" : "lat/long",
+            "final_drop_location_name" : "uttara",
+            "join_time" : "4:30 2/8/2019",
+            "fare" : "30"
+            
+            }],
+        },
         "response" : {
-                    "status" : "200",
-                    "message" : "Successful",
-                    "success" : "true",
-                    "error" : [{}]
-                    },
+            "status" : "200",
+            "message" : "Successful",
+            "success" : "true",
+            "error" : [{}]
+            },
     }
     
            
@@ -1944,7 +1944,7 @@ user : trip_host
             }
             
 
-### Collection Of Companies [Get]
+### View Companies [Get]
 
 + Headers
     {
@@ -1953,9 +1953,10 @@ user : trip_host
     
 + Request (application/json)
 
-{
-"user_id": "s23-234-234-234",
-}
+    {
+    "user_id": "s23-234-234-234",
+    }
+
 + Response 200 (application/json)
 
    
@@ -1963,14 +1964,14 @@ user : trip_host
     + Body
 
             {
-                "results" : [
+                "data" : [
                     { 
                         "company_id" : "2343",
                         "company_name" : "Brac Bank Ltd.",
                         "address" : "Anik Tower Niketan",
                         "location" : "lat/lon",
                         "phone_number" : "014897979",
-                        "verified" : "ture"
+                        "verified" : "true"
                     },
                     { 
                         "company_id" : "4356",
@@ -1978,7 +1979,7 @@ user : trip_host
                          "address" : "Anik Tower Niketan",
                         "location" : "lat/lon",
                         "phone_number" : "014897979",
-                        "verified" : "ture"
+                        "verified" : "true"
                     }
                 ],
                 "response" : { 
