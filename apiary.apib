@@ -743,12 +743,12 @@ This is for an unregistered user to sign up for a new account with a verified ph
     + Body
 
             {
-            "response" : {
-                    "status" : "200",
-                    "message" : "successful",
-                    "success" : "true",
-                    "error" : [{}]
-                    },
+                "response" : {
+                        "status" : "200",
+                        "message" : "Successfully Logged out ",
+                        "success" : "true",
+                        "error" : [{}]
+                        },
             }
 
 ### Find Trip [GET]
@@ -1766,7 +1766,7 @@ user : trip_host
  
  
  
-### Favourites [Get]
+### View Favourites [Get]
 
 + Headers
     {
@@ -1786,24 +1786,28 @@ user : trip_host
     + Body
 
             {
-            "data" : {
-                "favorites" : [
-                    { 
-                        "name" : "Work",
-                        "location" : "30.23423/23.23434",
-                        "location_name" : "Brac IT Services"
-                    },
-                    { 
-                        "name" : "Home",
-                        "location" : "30.23423/23.23434",
-                        "location_name" : "agargaon"
-                    },
-                    { 
-                        "name" : "AIUB",
-                        "location" : "30.23423/23.23434",
-                        "location_name" : "American International University Bangladesh"
-                    }
-                ],
+                "data" : {
+                    "favorites" : [
+                        { 
+                            "favorites_id" : 2342,
+                            "name" : "Work",
+                            "location" : "30.23423/23.23434",
+                            "location_name" : "Brac IT Services"
+                        },
+                        { 
+                            "favorites_id" : 2342,
+                            "name" : "Home",
+                            "location" : "30.23423/23.23434",
+                            "location_name" : "agargaon"
+                        },
+                        { 
+                            "favorites_id" : 2342,
+                            "name" : "AIUB",
+                            "location" : "30.23423/23.23434",
+                            "location_name" : "American International University Bangladesh"
+                        }
+                    ],
+                }
                 "response" : { 
                     "status" : "200",
                     "success": "true",
@@ -1811,9 +1815,8 @@ user : trip_host
                     "error" : [{}]
                 }
             }
-            }
             
-### Create Favourites [Post]
+### Add Favourites [Post]
 
 + Headers
     {
@@ -1838,20 +1841,18 @@ user : trip_host
     + Body
 
             {
-                "favorites" : [{ 
-                    "name" : "Work",
-                    "location" : "30.23423/23.23434",
-                    "location_name" : "Brac IT Services"
-                },
-                { 
-                    "name" : "Work2",
-                    "location" : "30.23423/23.23434",
-                    "location_name" : "Brac IT Services"
-                }],
+                "data": {
+                    "favorites" : { 
+                        "favorites_id" : 2342,
+                        "name" : "Work",
+                        "location" : "30.23423/23.23434",
+                        "location_name" : "Brac IT Services"
+                    },
+                }
                 "response" : { 
                     "status" : "200",
                     "success": "true",
-                    "message": "successful",
+                    "message": "New fovourite place has been added",
                     "error" : [{}]
             }
             
@@ -1863,12 +1864,7 @@ user : trip_host
     + Body
 
             {
-                "favorites" : { 
-                    "name" : "Work",
-                    "location" : "30.23423/23.23434",
-                    "location_name" : "Brac IT Services"
-                },
-              
+                "data" : {}
                 "response" : { 
                     "status" : "409",
                     "success": "false",
@@ -1891,7 +1887,7 @@ user : trip_host
         {
             "user_id": "s23-234-234-234",
             "favorites" : { 
-                    "favorites_id" : 2342
+                    "favorites_id" : 2342,
                     "name" : "Work",
                     "location" : "30.23423/23.23434",
                     "location_name" : "Brac IT Services"
@@ -1905,11 +1901,15 @@ user : trip_host
     + Body
 
             {
-                "favorites" : {
-                    "name" : "Work",
-                    "location" : "30.23423/23.23434",
-                    "location_name" : "Brac IT Services"
-                },
+
+                "data" : {
+                    "favorites" : {
+                        "favorites_id" : 2342,
+                        "name" : "Work",
+                        "location" : "30.23423/23.23434",
+                        "location_name" : "Brac IT Services"
+                    },
+                }
                 "response" : { 
                     "status" : "200",
                     "success": "true",
@@ -1926,12 +1926,14 @@ user : trip_host
     + Body
 
             {
-                "favorites" : { 
-                    "name" : "Work",
-                    "location" : "30.23423/23.23434",
-                    "location_name" : "Brac IT Services"
-                },
-              
+                
+                "data" : {
+                    "favorites" : { 
+                        "name" : "Work",
+                        "location" : "30.23423/23.23434",
+                        "location_name" : "Brac IT Services"
+                    },
+                }
                 "response" : { 
                     "status" : "409",
                     "success": "false",
