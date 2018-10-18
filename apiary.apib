@@ -761,12 +761,12 @@ This is for an unregistered user to sign up for a new account with a verified ph
 
         {
             "time":"5:30 PM",
-            "date":"2018-08-02",
-            "pickup_location":"car/cng/bike/any",
+            "date":"30-10-2018",
+            "pickup_location":"lat/lng",
             "pickup_location_name" : "uttata"
             "seat":"5",
-            "drop_location":"car/cng/bike/any",
-            "drop_location_name":"uttata",
+            "drop_location":"lat/lng",
+            "drop_location_name":"mohakhali",
             "vehicle_type":"2"
         }
 
@@ -777,34 +777,52 @@ This is for an unregistered user to sign up for a new account with a verified ph
     + Body
 
             {
-            "data" : {
-            
-            
-            "trip": [{
-                "start_location":"lat/lon",
-                "start_location_name":"niketan",
-                "end_location":"lat/lon",
-                "end_location_name":"uttara",
-                "start_time":"12:30",
-                "date":"2018-09-09",
-                "price_per_seat":"123",
-                "user":{
-                    "user_id" : "e4rw654r3",
-                    "full_name":"raju mazumder",
-                    "rating":"4.5",
-                    "number_of_rides":"4"
+                "data" : {
+                    "results": [
+                        {
+                                "start_location":"lat/lon",
+                                "start_location_name":"niketan",
+                                "end_location":"lat/lon",
+                                "end_location_name":"uttara",
+                                "start_time":"12:30 PM",
+                                "date":"30-10-2018",
+                                "price_per_seat":"123",
+                                "user": {
+                                    "user_id" : "e4rw654r3",
+                                    "full_name":"raju mazumder",
+                                    "rating":"4.5",
+                                    "number_of_rides":"4",
+                                    "profile_pic": "url",
+                                    "phone_number": 016764650452
+                                }
+                        },
+                        {
+                                "start_location":"lat/lon",
+                                "start_location_name":"niketan",
+                                "end_location":"lat/lon",
+                                "end_location_name":"uttara",
+                                "start_time":"12:30 PM",
+                                "date":"30-10-2018",
+                                "price_per_seat":"123",
+                                "user": {
+                                    "user_id" : "e4rw654r3",
+                                    "full_name":"raju mazumder",
+                                    "rating":"4.5",
+                                    "number_of_rides":"4",
+                                    "profile_pic": "url",
+                                    "phone_number": 016764650452
+                                }
+                        },
+                    ],
+                "count": 100,
+                "next":"2",
+                "prev":"1"
                 },
-              }],
-              "count": 100,
-              "next":"2",
-              "prev":"1"
-            },
-            
-             "response" : {
-                    "status" : "200",
-                    "message" : "successful",
-                    "success" : "true",
-                    "error" : [{}]
+                "response" : {
+                        "status" : "200",
+                        "success" : "true",
+                        "message" : "Trip(s) Found",
+                        "error" : [{}]
                     },
             }
             
@@ -1425,7 +1443,7 @@ user : trip_host
 + Request (application/json)
 
         {
-            "user_id" : "4as5d4a6"
+            "host_id" : "4as5d4a6"
             "trip_id" : "d4as5d"
         },
 
@@ -1436,26 +1454,24 @@ user : trip_host
 
         {
         
-        "data" : {
-            "total_earning" : 564,
-            "rating" : 5,
-            "trip_members" : 
-            [{
-                "user_id" : "4fewr6",
-                "full_name" : "hasan",
-                "pay_amount" : 45
-            }]
+            "data" : {
+                "total_earning" : 564,
+                "rating" : 5,
+                "trip_members" :[
+                    {
+                        "user_id" : "4fewr6",
+                        "full_name" : "hasan",
+                        "pay_amount" : 45
+                    }
+                ]
 
-        },
-
-          "response" : { 
-            "status" : "200",
-            "success": "true",
-            "message": "Successfull",
-            "error" : [{}]
             },
-          
-           
+            "response" : { 
+                "status" : "200",
+                "success": "true",
+                "message": "Tris has been ended",
+                "error" : [{}]
+                },
         },
         
 + Response 412 (application/json)
@@ -1463,17 +1479,17 @@ user : trip_host
     + Body
 
         {
-        
             "response" : { 
-            "status" : "412",
-            "success": "false",
-            "message": "Precondition Failed",
-            "error" : [{
-            "msg" : "Can't end trip with trip members existing"
-            }]
+                "status" : "412",
+                "success": "false",
+                "message": "Precondition Failed",
+                "error" : [
+                    {
+                        "message" : "Can't end trip with trip members on trip status"
+                    }
+                ]
             },
-           
-        },
+        }
 
 + Response 401 (application/json)
 
@@ -1482,14 +1498,16 @@ user : trip_host
         {
         
            "response" : { 
-            "status" : "401",
-            "success": "false",
-            "message": "Unauthorized",
-            "error" : [{
-            "msg" : "Only host can end trip"
-            }]
+                "status" : "401",
+                "success": "false",
+                "message": "Unauthorized",
+                "error" : [
+                    {
+                        "message" : "Only host can end trip"
+                    }
+                ]
             },
-        },       
+        }       
         
 ### Review and rating [post]
 
@@ -1531,9 +1549,8 @@ user : trip_host
         {
             "user_id":"442355",
             "trip_id":"dsgid",
-            "rider_id" : "4a6sd46asd46",
-            "satus" : "dropped"
-            
+            "host_id" : "4a6sd46asd46",
+            "status" : "dropped"
         }
 
 + Response 200 (application/json)
@@ -1544,26 +1561,21 @@ user : trip_host
 
            {
            
-            "data" : {
-           
-            "trip_members" : 
-            {
-                "user_id" : "4fewr6",
-                "full_name" : "hasan",
-                "profile_pic" : "url",
-                "pay_amount" : 45
-            },
-
-        },
-           
-             {
-                 "response" : { 
+                "data" : {
+                    "trip_member" : 
+                    {
+                        "user_id" : "4fewr6",
+                        "full_name" : "hasan",
+                        "profile_pic" : "url",
+                        "fare" : 45
+                    },
+                },
+                "response" : { 
                     "status" : "200",
                     "success": "true",
-                    "message": "successful",
+                    "message": "User has been dropped",
                     "error" : [{}]
-            },
-           
+                    }
            }
  
  
