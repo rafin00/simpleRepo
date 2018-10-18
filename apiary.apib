@@ -1000,14 +1000,12 @@ user : admin
 + Request (application/json)
 
         {
-           
-            
-             "time":"4:50 PM",
+            "time":"4:50 PM",
             "date":"2018-09-09",
             "start_location_name": "niketan",
-             "start_location": "lat/lon",
+            "start_location": "lat/lon",
             "end_location_name": "uttara",
-              "end_location": "lat/lon",
+            "end_location": "lat/lon",
             "vehicle_type": "2",
             "personal": "yes/no",
             "is_ac": true,
@@ -1017,18 +1015,14 @@ user : admin
             "price_per_seat": "120",
             "accept_auto": true,
             "need_confirmation": true,
-            
-            
             "amenities" : [
-            {
-            "amenity_id" : "1"
-            },
-            {
-            "amenity_id" : "2"
-            },
-            ],
-            
-            
+                {
+                    "amenity_id" : "1"
+                },
+                {
+                    "amenity_id" : "2"
+                },
+            ]
         }
 
 + Response 200 (application/json)
@@ -1039,43 +1033,49 @@ user : admin
 
             {
             
-             "data" : {
-            "trip" : {
-            "trip_id" : "d54we68qw",
-             "time":"4:50 PM",
-            "date":"2018-09-09",
-            "start_location_name": "niketan",
-             "start_location": "lat/lon",
-            "end_location_name": "uttara",
-              "end_location": "lat/lon",
-            "vehicle_type": "2",
-            "personal": "yes/no",
-            "is_ac": true,
-            "is_music": true,
-            "is_smoking": true,
-            "number_of_seat": "4",
-            "price_per_seat": "120",
-            "accept_auto": true,
-            "need_confirmation": true
-            },
-            
-            "amenities" : [
-            {
-            "amenity_id" : "1"
-            },
-            {
-            "amenity_id" : "2"
-            },
-            ]
-            
-            },
-            
-              "response" : { 
-            "status" : "200",
-            "success": "true",
-            "message": "successful",
-            "error" : [{}]
-            }
+                "data" : {
+                    "trip" : {
+                        "trip_id" : "d54we68qw",
+                        "time":"4:50 PM",
+                        "date":"2018-09-09",
+                        "start_location_name": "niketan",
+                        "start_location": "lat/lon",
+                        "end_location_name": "uttara",
+                        "end_location": "lat/lon",
+                        "vehicle_type": "2",
+                        "personal": "yes/no",
+                        "is_ac": true,
+                        "is_music": true,
+                        "is_smoking": true,
+                        "number_of_seat": "4",
+                        "number_of_seat_available": "1",
+                        "price_per_seat": "120",
+                        "accept_auto": true,
+                        "need_confirmation": true,
+                        "host": {
+                            "user_id" : "sdf-sdf-sdfsdf-32sdf"
+                            "full_name":"raju mazumder",
+                        },
+                        "status" : {
+                            "id" : 23434,
+                            "desc" : "Trip is ready",
+                        }
+                    },
+                    "amenities" : [
+                        {
+                        "amenity_id" : "1"
+                        },
+                        {
+                        "amenity_id" : "2"
+                        },
+                    ]
+                },
+                "response" : { 
+                "status" : "200",
+                "success": "true",
+                "message": "Trip Has Been Created",
+                "error" : [{}]
+                }
             }
                         
 
@@ -1283,8 +1283,7 @@ user : trip_host
         {
             "user_id" : "4as5d4a6"
             "trip_request_id" : "d4as5d"
-            "status" : "accept";
-            
+            "status" : "accept/decline";
         },
 
 + Response 200 (application/json)
@@ -1301,11 +1300,25 @@ user : trip_host
             "success": "true",
             "message": "Successfully done",
             "error" : [{}]
+            }    
+           
+        }
+        
++ Response 401 (application/json)
+
+    + Body
+
+        {
+            "response" : { 
+            "status" : "401",
+            "success": "false",
+            "message": "No seat(s) available",
+            "error" : [{}]
             },
             },    
            
         },
-        
+
 
 + Response 428  (application/json)
 
@@ -1385,7 +1398,7 @@ user : trip_host
         
             "trip_members" : [{
             "member_id" : "d4sa5d45a6s",
-             "fullname" : "rahin"
+            "fullname" : "rahin"
             "profile_pic" : "f4s6df6sd"
             "pickup_location" : "lat/long",
             "pickip_loaction_name" : "niketon",
