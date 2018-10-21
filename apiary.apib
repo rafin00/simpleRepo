@@ -147,17 +147,17 @@ This is for an unregistered user to sign up for a new account with a verified ph
 + Body
     
         {
-                "phone_number" : "01735528397",
-                "full_name" : " shuvo champ ",
-                "email" : "nightshuvo@gmail.com",
-                "company_email" : "shuvo@bracits.com",
-                "license_number" : "46sa4f86as4fg65wa4f6wa",
-                "country_code" : "565",
-                "fb_id" : "65sa4d65as4d6w4d6w",
-                "birth_date" : "2/3/5689",
-                "license_number" : "4d6s5a4d6as46a",
-                "profile_pic" : "7w9q8e76a5s4d",
-                "gender" : "male"
+            "phone_number" : "01735528397",
+            "full_name" : " shuvo champ ",
+            "email" : "nightshuvo@gmail.com",
+            "company_email" : "shuvo@bracits.com",
+            "license_number" : "46sa4f86as4fg65wa4f6wa",
+            "country_code" : "565",
+            "fb_id" : "65sa4d65as4d6w4d6w",
+            "birth_date" : "2/3/5689",
+            "license_number" : "4d6s5a4d6as46a",
+            "profile_pic" : "7w9q8e76a5s4d",
+            "gender" : "male"
         }
 
 + Response 200 (application/json)
@@ -230,7 +230,7 @@ This is for viewing the profile of host
                     "is_currently_working" : true,
                     "joined" : "10 July 2018",
                 }
-            rider_review_ratings:
+            "rider_review_ratings":
                 [{
                     "user" : {
                     "user_id" : "d46waw"
@@ -260,8 +260,7 @@ This is for viewing the profile of any rider
         
 + Request (application/json)
     {
-        "host_id" : "74564",
-        
+        "user_id" : "74564"
     }
 
     
@@ -270,52 +269,51 @@ This is for viewing the profile of any rider
 
     + Body
     
-        {   "data" : {
-            "user_profile" : {
-             "user_id" : "74564",
-            "profile_pic" : "url",
-            "full_name" : "utshaw",
-            "rating" :"4.5",
-            "number_of_rides_taken" : "33",
-            "number_of_rides_hosted" : "43",
-            "completeness" : "80%"
-            "is_license_number_verified" : true,
-            "is_phone_number_verified" : true,
-            "is_email_id_verified" : true,
-            "is_facebook_verified" : true
-            }
-            "user_company" :
-                {
-                    "company_id" : "0393",
-                    "company_name" : "google"
-                    "is_currently_working" : true,
-                    "joined" : "10 July 2018",
-                }
-            host_review_ratings:
-                [{
-                    "user" : {
-                    "user_id" : "d46waw"
-                    "fullname" : "utsahw",
+        {   
+            "data" : {
+                    "user_profile" : {
+                        "user_id" : "74564",
+                        "profile_pic" : "url",
+                        "full_name" : "utshaw",
+                        "rating" :"4.5",
+                        "number_of_rides_taken" : "33",
+                        "number_of_rides_hosted" : "43",
+                        "completeness" : "80%"
+                        "is_license_number_verified" : true,
+                        "is_phone_number_verified" : true,
+                        "is_email_id_verified" : true,
+                        "is_facebook_verified" : true
+                        },
+                    "user_company" :
+                        {
+                            "company_id" : "0393",
+                            "company_name" : "google"
+                            "is_currently_working" : true,
+                            "joined" : "10 July 2018",
+                        },
+                    "host_review_ratings":
+                        [{
+                            "user" : {
+                            "user_id" : "d46waw"
+                            "fullname" : "utsahw",
+                            }
+                            "rating" : "4.5",
+                            "review" : "Awesome",
+                            "date" : "2/3/5846"
+                        }],
+                    "rider_review_ratings":
+                        [{
+                            "user" : {
+                            "user_id" : "d46waw"
+                            "fullname" : "utsahw",
+                            }
+                            "rating" : "4.5",
+                            "review" : "Awesome",
+                            "date" : "2/3/5846"
+                        }]
                     }
-                    "rating" : "4.5",
-                    "review" : "Awesome",
-                    "date" : "2/3/5846"
-                }]
-                
-                
-            rider_review_ratings:
-                [{
-                    "user" : {
-                    "user_id" : "d46waw"
-                    "fullname" : "utsahw",
-                    }
-                    "rating" : "4.5",
-                    "review" : "Awesome",
-                    "date" : "2/3/5846"
-                }]
-            }
-           
-            error: { [] }
+            
+                error: { [] }
         }
             
 ### update Profile [PUT] 
@@ -340,6 +338,7 @@ This is for viewing the profile of any rider
             "country_code" : "BD-007",
            
         }
+
         
 + Response (application/json)
     
@@ -378,6 +377,7 @@ This is for adding a company by an user if it doesn't exist in DB
     }
     
 + Request (application/json)
+
         {
             "company_name" : "bits",
             "phone_number" : "01735680276",
