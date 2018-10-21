@@ -9,6 +9,8 @@ It is simple application to share your ride.
 
 It is  verifying phone number after taking it and returning response as verified or not.
 
+Route : -/verify_phone_number
+
 + Request (application/json)
 
         {
@@ -29,7 +31,7 @@ It is  verifying phone number after taking it and returning response as verified
             }
             
 + Response 400 (application/json)
- 
+
      
     + Body
 
@@ -62,6 +64,8 @@ It is  verifying phone number after taking it and returning response as verified
 ### Phone Number Authentication [POST]
 
 This is for authenticating phone number while signing up in the app. 
+
+Route : -/authenticate_phone_number
 
 + Request (application/json)
 
@@ -128,6 +132,8 @@ If phone number exists and has done signup already, then return user information
 
 This is for an unregistered user to sign up for a new account with a verified phone number.
 
+Route : -/user/signup
+
 + Request (application/json)
 
     + Attributes
@@ -189,7 +195,679 @@ This is for an unregistered user to sign up for a new account with a verified ph
             }
             
 
+### Facebook verification[Post]
+
+Route : -/user/profile/my/fb_verify
+
++ Request (application/json)
+
+    + Attributes
+        + fb_id (string, required)
+        
+        
+    + Body
+    
+            {
+                "fb_id" : "4d6s5a4d6as46a"
+                "user_id" : "d46aw"
+            }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+    
+            {
+            "data" : {},
+            
+                "response" : {
+                    "status" : "200",
+                    "message" : "Successful",
+                    "success" : "true",
+                    "error" : [{}]
+                    },
+            }
+            
++ Response 409 (application/json)
+
+   Already exists license
+
+    + Body
+    
+            {
+                 "response" : {
+                    "status" : "409",
+                    "message" : "Conflict",
+                    "success" : "false",
+                    "error" : [{
+                    "message" : "fb_id already exists"}]
+                    },
+            }
+
++ Response 400 (application/json)
+
+   Invalid fb_id
+
+    + Body
+    
+            {
+                 "response" : {
+                    "status" : "400",
+                    "message" : "Bad Request",
+                    "success" : "false",
+                    "error" : [{
+                    "message" : "Id invalid"}]
+                    },
+            }
+            
++ Response 404 (application/json)
+
+   fb_id doesn't exist
+
+    + Body
+    
+            {
+                 "response" : {
+                    "status" : "404",
+                    "message" : "Not found",
+                    "success" : "false",
+                    "error" : [{
+                    "message" : "Id  doesn't exist"}]
+                    },
+            }
+
+
+### Add License [POST]
+
+This is for an unregistered user to sign up for a new account with a verified phone number.
+
+Route : -/user/profile/my/license/
+
++ Request (application/json)
+
+    + Attributes
+        + license_number (string, optional)
+        
+    + Body
+    
+            {
+                "license_number" : "4d6s5a4d6as46a",
+                "user_id" : "d46aw"
+            }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+    
+            {
+            "data" : {},
+            
+                "response" : {
+                    "status" : "200",
+                    "message" : "Successful",
+                    "success" : "true",
+                    "error" : [{}]
+                    },
+            }
+
+    
++ Response 400 (application/json)
+
+   
+
+    + Body
+
+            {
+                "data" :{},
+
+                "response" : {
+                    "status" : 400,
+                    "message" : "Bad Request",
+                    "success" : "true",
+                    "error" : [{
+                    "message" : "License syntax error"
+                    }]
+                }
+            }
+            
+            
++ Response 409 (application/json)
+
+   
+
+    + Body
+
+            {
+                "data" :{},
+
+                "response" : {
+                    "status" : 409,
+                    "message" : "Conflict",
+                    "success" : "true",
+                    "error" : [{
+                    "message" : "License Already Exists"
+                    }]
+                }
+            }
+
+### License verification [POST]
+
+This is for an unregistered user to sign up for a new account with a verified phone number.
+
+Route : -/user/profile/my/license/verify
+
++ Request (application/json)
+
+    + Attributes
+        + license_number (string, optional)
+        
+        
+    + Body
+    
+            {
+                "license_number" : "4d6s5a4d6as46a"
+                "token" : "d46aw"
+            }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+    
+            {
+            "data" : {},
+            
+                "response" : {
+                    "status" : "200",
+                    "message" : "Successful",
+                    "success" : "true",
+                    "error" : [{}]
+                    },
+            }
+
+
++ Response 400 (application/json)
+
+   Invalid license
+
+    + Body
+    
+            {
+                 "response" : {
+                    "status" : "400",
+                    "message" : "Conflict",
+                    "success" : "false",
+                    "error" : [{
+                    "message" : "token expired"}]
+                    },
+            }
+            
+
+### Delete verification [Delete]
+
+This is for an unregistered user to sign up for a new account with a verified phone number.
+
+Route : -/user/profile/my/license/
+
++ Request (application/json)
+
+    + Attributes
+        + license_number (string, optional)
+        
+        
+    + Body
+    
+            {
+                "license_number" : "4d6s5a4d6as46a"
+                "user_id" : "d46aw"
+            }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+    
+            {
+            "data" : {},
+            
+                "response" : {
+                    "status" : "200",
+                    "message" : "Successful",
+                    "success" : "true",
+                    "error" : [{}]
+                    },
+            }
+
+
+### Add Email [Post]
+
+Route : -/user/profile/my/email
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
+    
++ Request (application/json)
+
+        {
+            "email" : "sdad@gmail.com",
+            "user_id" : "e4r6w4e"
+
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            {
+                "data" :{
+                "email" : "utshe@gmail.com"
+                },
+                "response" : {
+                    "status" : 200,
+                    "message" : "Successful",
+                    "success" : "true",
+                    "error" : [{}]
+                }
+            }
+
++ Response 400 (application/json)
+
+   
+
+    + Body
+
+            {
+                "data" :{},
+
+                "response" : {
+                    "status" : 400,
+                    "message" : "Bad Request",
+                    "success" : "true",
+                    "error" : [{
+                    "message" : "email syntax error"
+                    }]
+                }
+            }
+            
+            
++ Response 409 (application/json)
+
+   
+
+    + Body
+
+            {
+                "data" :{},
+
+                "response" : {
+                    "status" : 400,
+                    "message" : "Conflict",
+                    "success" : "true",
+                    "error" : [{
+                    "message" : "Email Already Exists"
+                    }]
+                }
+            }
+
+
+### Email varification [Post]
+
+Route : -/user/profile/my/email/verify
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
+    
++ Request (application/json)
+
+        {
+            "email" : "sdad@gmail.com",
+            "toekn" : "e4r6w4e"
+
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            {
+                "data" :{},
+                "response" : {
+                    "status" : 200,
+                    "message" : "Successful",
+                    "success" : "true",
+                    "error" : [{}]
+                }
+            }
+
++ Response 400 (application/json)
+
+   
+
+    + Body
+
+            {
+                "data" :{},
+
+                "response" : {
+                    "status" : 400,
+                    "message" : "Bad Request",
+                    "success" : "true",
+                    "error" : [{
+                    "message" : "Token Expired"
+                    }]
+                }
+            }
+
+
+
+### Delete Email [Delete]
+
+Route : -/user/profile/my/email
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
+    
++ Request (application/json)
+
+        {
+            "email" : "sdad@gmail.com",
+            "toekn" : "e4r6w4e"
+
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            {
+                "data" :{},
+                "response" : {
+                    "status" : 200,
+                    "message" : "Successful",
+                    "success" : "true",
+                    "error" : [{}]
+                }
+            }
+
+
+### Update Profile [PUT] 
+
+ This is for editing one's profile, for an overall change.
+ 
+ Route : -/user/profile/my
+ 
+ + Headers
+    {
+        "api_key" : "Token cjhh"
+    }
++ Request (application/json)
+
+        {   
+            "user_id" : "sdfe68r"
+            "full_name" : "razib",
+            "profile_pic" : "url",
+            "birth_date" : "26.01.1900",
+            "gender" : "male/female",
+            "office_start_time" : "8:00",
+            "office_end_time" : "16:00",
+            "country_code" : "BD-007",
+           
+        }
+        
++ Response (application/json)
+    
+        { 
+           
+            "data" : { "user_id" : "hiou74564634",
+                        "full_name" : "razib",
+                        "profile_pic" : "url",
+                        "birth_date" : "26.01.1900",
+                        "gender" : "male/female",
+                        "office_start_time" : "8:00",
+                        "office_end_time" : "16:00",
+                        "country_code" : "BD-007",
+                        "joining_date" : "2/3/2015"
+                         }
+                         
+                          "response" : {
+                    "status" : "200",
+                    "message" : "Successful",
+                    "success" : "true",
+                    "error" : [{}]
+                    },
+                         
+                         }
+
+
+### View Companies [Get]
+
+Route : -/user/profile/company
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
+    
++ Request (application/json)
+
+    {
+    "user_id": "s23-234-234-234",
+    }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            {
+                "data" : [
+                    { 
+                        "company_id" : "2343",
+                        "company_name" : "Brac Bank Ltd.",
+                        "address" : "Anik Tower Niketan",
+                        "location" : "lat/lon",
+                        "phone_number" : "014897979",
+                        "verified" : "true"
+                    },
+                    { 
+                        "company_id" : "4356",
+                        "company_name" : "Brac IT Services",
+                         "address" : "Anik Tower Niketan",
+                        "location" : "lat/lon",
+                        "phone_number" : "014897979",
+                        "verified" : "true"
+                    }
+                ],
+                "response" : { 
+                    "status" : "200",
+                    "success": "true",
+                    "message": "Successful",
+                    "error" : [{}]
+            }
+            
+
+### Add a Company [Post]
+
+Route : -/user/profile/company
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
+    
++ Request (application/json)
+
+        {
+            "company_id" : "4dfe6d46w",
+           "user_id" : "d4s64dwq"
+           "is_currently_working" : true
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            {
+                "data" :{
+                "company" : [{
+                 "company_name" : "Brac Bank Ltd.",
+                 "company_id" : "dailejw",
+                    "phone_number" : 01676868564,
+                    "address" : "34/A niketan, dhaka",
+                    "location" : "30.23423/23.23434",
+                    "company_email" : "bits@bracits.com",
+                     "is_currently_working" : false
+                }],
+                   
+                },
+                "response" : { 
+                    "status" : "200",
+                    "success": "true",
+                    "message": "Successful",
+                    "error" : [{}]
+                }
+            }
+          
+
+### Update a Company [Put]
+
+Route : -/user/profile/company
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
+    
++ Request (application/json)
+
+        {
+            "company_id" : "4dfe6d46w",
+           "user_id" : "d4s64dwq"
+           "is_currently_working" : false
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            {
+                "data" :{
+                "company" : [{
+                 "company_name" : "Brac Bank Ltd.",
+                 "company_id" : "dailejw",
+                    "phone_number" : 01676868564,
+                    "address" : "34/A niketan, dhaka",
+                    "location" : "30.23423/23.23434",
+                    "company_email" : "bits@bracits.com",
+                     "is_currently_working" : false
+                }],
+                   
+                },
+                "response" : { 
+                    "status" : "200",
+                    "success": "true",
+                    "message": "Successful",
+                    "error" : [{}]
+                }
+            }
+          
+
+### Delete a Company [Delete]
+
+Route : -/user/profile/company
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
+    
++ Request (application/json)
+
+        {
+            "company_id" : "4dfe6d46w",
+           "user_id" : "d4s64dwq"
+          
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            {
+                "data" :{},
+                "response" : { 
+                    "status" : "200",
+                    "success": "true",
+                    "message": "Successful",
+                    "error" : [{}]
+                }
+            }
+          
+### Add company request [Post] 
+            
+This is for adding a company by an user if it doesn't exist in DB
+
+ROute : -/user/profile/my/company/request
+
++ Headers
+    {
+        "api_key" : "Token gfhjfh"
+    }
+    
++ Request (application/json)
+        {
+            "company_name" : "bits",
+            "phone_number" : "01735680276",
+            "address" : "Tejgaon Link Road",
+            "location" : "lat/lng",
+            "location_name" : "niketan/gulshan",
+            "company_email" : "bits@bracits.com"
+        }
+        
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "data" : {},
+            
+                 "response" : {
+                    "status" : "200",
+                    "message" : "Successful",
+                    "success" : "true",
+                    "error" : [{}]
+                    },
+            }
+            
+            
+
 ### View Host profile[Get]
+
+Route : -/user/rides/[trip_id]/host/[host_id]
 
 This is for viewing the profile of host 
 
@@ -249,10 +927,13 @@ This is for viewing the profile of host
                     "error" : [{}]
                     },
         }
-        
+
+
 ### View Rider profile[Get]
 
 This is for viewing the profile of any rider
+
+Route : -/user/rides/[trip_id]/rider/[rider_id]
 
 + Headers {
     "api_key" : "Token ddsgdsggff"
@@ -389,22 +1070,11 @@ This is for adding a company by an user if it doesn't exist in DB
         
 + Response 200 (application/json)
 
-    + Body
-    
-            {
-                "data" : {},
-            
-                 "response" : {
-                    "status" : "200",
-                    "message" : "Successful",
-                    "success" : "true",
-                    "error" : [{}]
-                    },
-            }
-            
 ### View friend list [Get]
 
 This is for the users to see their friends list, who are in the list
+
+Route : -/user/friends
 
 + Headers
         { 
@@ -462,6 +1132,8 @@ This is for the users to see their friends list, who are in the list
 
 User can see the ride history according to types such as hosted, taken or both
 
+Route : -/user/rides/
+
 + Headers
     {
         "api_key" :"Token ghfsdhb"
@@ -511,6 +1183,8 @@ User can see the ride history according to types such as hosted, taken or both
            
 ### User hosted ride history[Get]
 
+Route : -/user/rides/hosted
+
 User can see the ride history according to types such as hosted, taken or both
 
 + Headers
@@ -559,173 +1233,11 @@ User can see the ride history according to types such as hosted, taken or both
     }
     
     
-### Facebook verification[Post]
-
-+ Request (application/json)
-
-    + Attributes
-        + fb_id (string, required)
         
-        
-    + Body
-    
-            {
-                "fb_id" : "4d6s5a4d6as46a"
-                "user_id" : "d46aw"
-            }
-
-+ Response 200 (application/json)
-
-   
-
-    + Body
-    
-            {
-            "data" : {},
-            
-                "response" : {
-                    "status" : "200",
-                    "message" : "Successful",
-                    "success" : "true",
-                    "error" : [{}]
-                    },
-            }
-            
-+ Response 409 (application/json)
-
-   Already exists license
-
-    + Body
-    
-            {
-                 "response" : {
-                    "status" : "409",
-                    "message" : "Conflict",
-                    "success" : "false",
-                    "error" : [{
-                    "message" : "fb_id already exists"}]
-                    },
-            }
-
-+ Response 400 (application/json)
-
-   Invalid fb_id
-
-    + Body
-    
-            {
-                 "response" : {
-                    "status" : "400",
-                    "message" : "Bad Request",
-                    "success" : "false",
-                    "error" : [{
-                    "message" : "Id invalid"}]
-                    },
-            }
-            
-+ Response 404 (application/json)
-
-   fb_id doesn't exist
-
-    + Body
-    
-            {
-                 "response" : {
-                    "status" : "404",
-                    "message" : "Not found",
-                    "success" : "false",
-                    "error" : [{
-                    "message" : "Id  doesn't exist"}]
-                    },
-            }
-
-           
-            
-### License verification [POST]
-
-This is for an unregistered user to sign up for a new account with a verified phone number.
-
-+ Request (application/json)
-
-    + Attributes
-        + license_number (string, optional)
-        
-        
-    + Body
-    
-            {
-                "license_number" : "4d6s5a4d6as46a"
-                "user_id" : "d46aw"
-            }
-
-+ Response 200 (application/json)
-
-   
-
-    + Body
-    
-            {
-            "data" : {},
-            
-                "response" : {
-                    "status" : "200",
-                    "message" : "Successful",
-                    "success" : "true",
-                    "error" : [{}]
-                    },
-            }
-            
-+ Response 409 (application/json)
-
-   Already exists license
-
-    + Body
-    
-            {
-                 "response" : {
-                    "status" : "409",
-                    "message" : "Conflict",
-                    "success" : "false",
-                    "error" : [{
-                    "message" : "license already exists"}]
-                    },
-            }
-
-+ Response 400 (application/json)
-
-   Invalid license
-
-    + Body
-    
-            {
-                 "response" : {
-                    "status" : "400",
-                    "message" : "Conflict",
-                    "success" : "false",
-                    "error" : [{
-                    "message" : "license Invalid"}]
-                    },
-            }
-            
-+ Response 404 (application/json)
-
-   license doesn't exist
-
-    + Body
-    
-            {
-                 "response" : {
-                    "status" : "404",
-                    "message" : "Not found",
-                    "success" : "false",
-                    "error" : [{
-                    "message" : "license  doesn't exist"}]
-                    },
-            }
-
-
             
 ### Logout User [POST]
+
+Route : -/user/logout
 
 + Headers
     {
@@ -752,6 +1264,8 @@ This is for an unregistered user to sign up for a new account with a verified ph
             }
 
 ### Find Trip [GET]
+
+Route : -/user/rides/find
 
 + Headers
     {
@@ -834,6 +1348,8 @@ This is for an unregistered user to sign up for a new account with a verified ph
             
 ### Trip Details [GET]
 
+Route : -/user/rides/[ride_id]
+
 + Headers
     {
         "api_key":"Token dgsdgdsgds"
@@ -898,6 +1414,9 @@ This is for an unregistered user to sign up for a new account with a verified ph
         
 
 ### View amenities [Get]
+
+Route : -/user/amenities
+
 user : regular
 + Headers
     {
@@ -1017,6 +1536,8 @@ user : admin
 
 ### Create Trip [POST]
 
+Route : -/user/rides/
+
 + Headers
     {
         "api_key":"Token dgsdgdsgds"
@@ -1104,6 +1625,8 @@ user : admin
 
 ### Start Trip [PUT]
 
+Route : -/user/rides/
+
 + Headers
     {
         "api_key":"Token dgsdgdsgds"
@@ -1161,6 +1684,8 @@ user : admin
              
 
 ### Send Trip Request [POST]
+
+Route : -/user/rides/request
 
 + Headers
     {
@@ -1233,6 +1758,8 @@ user : admin
 
 
 ### Edit Trip [Put]
+
+Route : -/user/rides/
 
 + Headers
     {
@@ -1312,6 +1839,8 @@ user : admin
 
 ### Cancel Trip [Put]
 
+Route : -/user/rides/
+
 + Headers
     {
         "api_key":"Token dgsdgdsgds"
@@ -1363,6 +1892,8 @@ user : admin
             }
 
 ### View All Trip Requests [Get]
+
+Route : -/user/rides/[trip_id]/requests
 
 + Headers
     {
@@ -1475,6 +2006,8 @@ user : admin
 
 ### Accept/Decline Trip Request [Put]
 
+Route : -/user/rides/request
+
 user : trip_host
 + Headers
     {
@@ -1582,6 +2115,8 @@ user : trip_host
         <!--
 ### View Trip [Get]
 
+Route : -/user/rides/[trip_id]
+
 + Request (application/json)
 
         {
@@ -1623,6 +2158,8 @@ user : trip_host
         },
 -->
 ### End Trip[Put]
+
+Route : -/user/rides
 
 + Request (application/json)
 
@@ -1693,7 +2230,9 @@ user : trip_host
             },
         }       
         
-### Give Review and rating [post]
+### Give Host Review and rating [post]
+
+Route : -/user/rides/rided/review_rating
 
 + Request (application/json)
 
@@ -1723,7 +2262,42 @@ user : trip_host
         },
         
 
+### Give Rider Review and rating [post]
+
+Route : -/user/rides/hosted/review_rating
+
++ Request (application/json)
+
+        {
+            "from_id" : "user_id",
+            "to_id" : "host_id",
+            "trip_id" : "d4as5d",
+            "rating" : "5",
+            "review" : "very good"
+        },
+
+
++ Response 200 (application/json)
+
+    + Body
+
+        {
+            "data" : {
+                
+            }
+            "response" : { 
+                "status" : "200",
+                "success": "true",
+                "message": "successful",
+                "error" : [{}]
+                },
+        },
+        
+
+
 ### Drop Rider [Put]
+
+Route : -/user/rides/
 
 + Headers
     {
@@ -1767,6 +2341,8 @@ user : trip_host
  
  
 ### View Favourites [Get]
+
+Route : -/user/profile/favorites
 
 + Headers
     {
@@ -1817,6 +2393,8 @@ user : trip_host
             }
             
 ### Add Favourites [Post]
+
+Route : -/user/profile/favorites
 
 + Headers
     {
@@ -1876,6 +2454,8 @@ user : trip_host
             
 
 ### Update Favourites [Put]
+
+Route : -/user/profile/favorites
 
 + Headers
     {
@@ -1944,94 +2524,9 @@ user : trip_host
             }
             
 
-### View Companies [Get]
-
-+ Headers
-    {
-        "api_key":"Token dgsdgdsgds"
-    }
-    
-+ Request (application/json)
-
-    {
-    "user_id": "s23-234-234-234",
-    }
-
-+ Response 200 (application/json)
-
-   
-
-    + Body
-
-            {
-                "data" : [
-                    { 
-                        "company_id" : "2343",
-                        "company_name" : "Brac Bank Ltd.",
-                        "address" : "Anik Tower Niketan",
-                        "location" : "lat/lon",
-                        "phone_number" : "014897979",
-                        "verified" : "true"
-                    },
-                    { 
-                        "company_id" : "4356",
-                        "company_name" : "Brac IT Services",
-                         "address" : "Anik Tower Niketan",
-                        "location" : "lat/lon",
-                        "phone_number" : "014897979",
-                        "verified" : "true"
-                    }
-                ],
-                "response" : { 
-                    "status" : "200",
-                    "success": "true",
-                    "message": "Successful",
-                    "error" : [{}]
-            }
-            
 //Completed till here
 
-
-### Add a Company [Post]
-
-+ Headers
-    {
-        "api_key":"Token dgsdgdsgds"
-    }
-    
-+ Request (application/json)
-
-        {
-            "company_id" : "4dfe6d46w",
-           "user_id" : "d4s64dwq"
-        }
-
-+ Response 200 (application/json)
-
-   
-
-    + Body
-
-            {
-                "data" :{
-                "company" : [{
-                 "company_name" : "Brac Bank Ltd.",
-                 "company_id" : "dailejw",
-                    "phone_number" : 01676868564,
-                    "address" : "34/A niketan, dhaka",
-                    "location" : "30.23423/23.23434",
-                    "company_email" : "bits@bracits.com"
-                }],
-                   
-                },
-                "response" : { 
-                    "status" : "200",
-                    "success": "true",
-                    "message": "Successful",
-                    "error" : [{}]
-                }
-            }
-            
+  
 ### View Pending Friend Request [Get]
 
 Here user will see the list of pending friends request
@@ -2075,75 +2570,6 @@ Here user will see the list of pending friends request
                     
                         
             }
-
-### Email varification [Post]
-
-+ Headers
-    {
-        "api_key":"Token dgsdgdsgds"
-    }
-    
-+ Request (application/json)
-
-        {
-            "email" : "sdad@gmail.com",
-            "user_id" : "e4r6w4e"
-
-        }
-
-+ Response 200 (application/json)
-
-   
-
-    + Body
-
-            {
-                "data" :{},
-                "response" : {
-                    "status" : 200,
-                    "message" : "Successful",
-                    "success" : "true",
-                    "error" : [{}]
-                }
-            }
-
-+ Response 400 (application/json)
-
-   
-
-    + Body
-
-            {
-                "data" :{},
-
-                "response" : {
-                    "status" : 400,
-                    "message" : "Bad Request",
-                    "success" : "true",
-                    "error" : [{
-                    "message" : "emain syntax error"
-                    }]
-                }
-            }
-+ Response 409 (application/json)
-
-   
-
-    + Body
-
-            {
-                "data" :{},
-
-                "response" : {
-                    "status" : 400,
-                    "message" : "Conflict",
-                    "success" : "true",
-                    "error" : [{
-                    "message" : "Email Already Exists"
-                    }]
-                }
-            }
-
 
 [Admin]
 ### Edit Company [Post]
@@ -2214,6 +2640,7 @@ Here user will see the list of pending friends request
 
 ### View Languages[Get]
 
+Route : -/user/languages
 
 + Headers
     {
@@ -2248,6 +2675,8 @@ Here user will see the list of pending friends request
             }
 ///what to return 
 ### Send friend request[Post]
+
+Route : -/user/friend/send
 
 + Headers
     {
@@ -2297,6 +2726,8 @@ Here user will see the list of pending friends request
 
 
 ### Accept/Block/unblock/unfriend friend [Post]
+
+Route : -/user/friends/update
 
 + Headers
     {
@@ -2349,10 +2780,12 @@ Here user will see the list of pending friends request
 
 ### View Friend request[Get]
 
+Route : -/user/friends
+
 + Headers
     {
-        "api_key" : "Token dgsdgdsgds"
-    }
+        "api_key" :"f4des4fe"
+        }
     
 + Request (application/json)
 
@@ -2393,6 +2826,8 @@ Here user will see the list of pending friends request
 
 ### Report[post]
 
+Route : -/user/report
+
 + Headers
     {
         "api_key":"Token dgsdgdsgds"
@@ -2424,6 +2859,8 @@ Here user will see the list of pending friends request
             }
 
 ### View Search history[Get]
+
+Route : -/user/search_history
 
 
 + Headers
