@@ -197,7 +197,7 @@ Route : -/user/signup
 
 ### Facebook verification[Post]
 
-Route : -/user/profile/my/fb_verify
+Route : -/user/profile/my/fb
 
 + Request (application/json)
 
@@ -244,6 +244,74 @@ Route : -/user/profile/my/fb_verify
                     "message" : "fb_id already exists"}]
                     },
             }
+
++ Response 400 (application/json)
+
+   Invalid fb_id
+
+    + Body
+    
+            {
+                 "response" : {
+                    "status" : "400",
+                    "message" : "Bad Request",
+                    "success" : "false",
+                    "error" : [{
+                    "message" : "Id invalid"}]
+                    },
+            }
+            
++ Response 404 (application/json)
+
+   fb_id doesn't exist
+
+    + Body
+    
+            {
+                 "response" : {
+                    "status" : "404",
+                    "message" : "Not found",
+                    "success" : "false",
+                    "error" : [{
+                    "message" : "Id  doesn't exist"}]
+                    },
+            }
+
+
+### Remove Facebook verification[Delete]
+
+Route : -/user/profile/my/fb
+
++ Request (application/json)
+
+    + Attributes
+        + fb_id (string, required)
+        
+        
+    + Body
+    
+            {
+                "fb_id" : "4d6s5a4d6as46a"
+                "user_id" : "d46aw"
+            }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+    
+            {
+            "data" : {},
+            
+                "response" : {
+                    "status" : "200",
+                    "message" : "Successful",
+                    "success" : "true",
+                    "error" : [{}]
+                    },
+            }
+  
 
 + Response 400 (application/json)
 
@@ -407,7 +475,7 @@ Route : -/user/profile/my/license/verify
             }
             
 
-### Delete verification [Delete]
+### Delete license [Delete]
 
 This is for an unregistered user to sign up for a new account with a verified phone number.
 
@@ -607,7 +675,8 @@ Route : -/user/profile/my/email
             }
 
 
-### Update Profile [PUT] 
+
+### View My Profile [Get] 
 
  This is for editing one's profile, for an overall change.
  
@@ -621,30 +690,30 @@ Route : -/user/profile/my/email
 
         {   
             "user_id" : "sdfe68r"
-            "full_name" : "razib",
-            "profile_pic" : "url",
-            "birth_date" : "26.01.1900",
-            "gender" : "male/female",
-            "office_start_time" : "8:00",
-            "office_end_time" : "16:00",
-            "country_code" : "BD-007",
-           
+            
         }
         
 + Response (application/json)
     
         { 
            
-            "data" : { "user_id" : "hiou74564634",
+            "data" : { 
+                        
+                        "favorites" : [{
+                        "name" : "home",
+                        "location_name" : "baddda"
+                        },
+                        {
+                        "name" : "home",
+                        "location_name" : "baddda"
+                        }
+                        ],
+                        "user" : {
+                        "user_id" : "4r465wr",
                         "full_name" : "razib",
-                        "profile_pic" : "url",
-                        "birth_date" : "26.01.1900",
-                        "gender" : "male/female",
-                        "office_start_time" : "8:00",
-                        "office_end_time" : "16:00",
-                        "country_code" : "BD-007",
-                        "joining_date" : "2/3/2015"
-                         }
+                        "complete" : 50
+                        }
+                         
                          
                           "response" : {
                     "status" : "200",
@@ -656,7 +725,122 @@ Route : -/user/profile/my/email
                          }
 
 
-### View Companies [Get]
+###Edit Profile [Get] 
+
+ This is for editing one's profile, for an overall change.
+ 
+ Route : -/user/profile/my
+ 
+ + Headers
+    {
+        "api_key" : "Token cjhh"
+    }
++ Request (application/json)
+
+        {   
+            "user_id" : "sdfe68r"
+            
+        }
+        
++ Response (application/json)
+    
+        { 
+           
+            "data" : { 
+                        
+                         "data" : { 
+                         "user" : {
+                         "user_id" : "hiou74564634",
+                        "full_name" : "razib",
+                        "profile_pic" : "url",
+                        "birth_date" : "26.01.1900",
+                        "gender" : "male/female",
+                        "fb_id" : "45w4q",
+                        "phone_number":0124564,
+                        
+                        "country_code" : "BD-007",
+                        "joining_date" : "2/3/2015"
+                         }
+                         "company" : {
+                         "company_id" : 5e646qww68,
+                         "company_name" : "brac"
+                         "id_currently_working":true
+                         }
+                         }
+                         
+                         
+                          "response" : {
+                    "status" : "200",
+                    "message" : "Successful",
+                    "success" : "true",
+                    "error" : [{}]
+                    },
+                         
+                         }
+
+
+###Edit Profile [Put] 
+
+ This is for editing one's profile, for an overall change.
+ 
+ Route : -/user/profile/my
+ 
+ + Headers
+    {
+        "api_key" : "Token cjhh"
+    }
++ Request (application/json)
+
+        {   
+            "user_id" : "hiou74564634",
+            "full_name" : "razib",
+            "profile_pic" : "url",
+            "birth_date" : "26.01.1900",
+            "gender" : "male/female",
+           
+           
+
+        }
+        
++ Response (application/json)
+    
+        { 
+           
+            "data" : { 
+                        
+                         "data" : { 
+                         "user" : {
+                         "user_id" : "hiou74564634",
+                        "full_name" : "razib",
+                        "profile_pic" : "url",
+                        "birth_date" : "26.01.1900",
+                        "gender" : "male/female",
+                        "fb_id" : "45w4q",
+                        "phone_number":0124564,
+                        
+                        "country_code" : "BD-007",
+                        "joining_date" : "2/3/2015"
+                         }
+                         "company" : {
+                         "company_id" : 5e646qww68,
+                         "company_name" : "brac"
+                         "id_currently_working":true
+                         }
+                         }
+                         
+                         
+                          "response" : {
+                    "status" : "200",
+                    "message" : "Successful",
+                    "success" : "true",
+                    "error" : [{}]
+                    },
+                         
+                         }
+
+
+
+### View User Companies [Get]
 
 Route : -/user/profile/company
 
@@ -862,7 +1046,253 @@ ROute : -/user/profile/my/company/request
                     "error" : [{}]
                     },
             }
+
+
+### View Favourites [Get]
+
+Route : -/user/profile/favorites
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
+    
++ Request (application/json)
+
+        {
+            "user_id": "s23-234-234-234"
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            {
+                "data" : {
+                    "favorites" : [
+                        { 
+                            "favorites_id" : 2342,
+                            "name" : "Work",
+                            "location" : "30.23423/23.23434",
+                            "location_name" : "Brac IT Services"
+                        },
+                        { 
+                            "favorites_id" : 2342,
+                            "name" : "Home",
+                            "location" : "30.23423/23.23434",
+                            "location_name" : "agargaon"
+                        },
+                        { 
+                            "favorites_id" : 2342,
+                            "name" : "AIUB",
+                            "location" : "30.23423/23.23434",
+                            "location_name" : "American International University Bangladesh"
+                        }
+                    ],
+                }
+                "response" : { 
+                    "status" : "200",
+                    "success": "true",
+                    "message": "successful",
+                    "error" : [{}]
+                }
+            }
             
+### Add Favourites [Post]
+
+Route : -/user/profile/my/favorites
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
+    
++ Request (application/json)
+
+        {
+            "user_id": "s23-234-234-234",
+            "favorites" : { 
+                    "name" : "Work",
+                    "location" : "30.23423/23.23434",
+                    "location_name" : "Brac IT Services"
+                },
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            {
+                "data": {
+                    "favorites" : { 
+                        "favorites_id" : 2342,
+                        "name" : "Work",
+                        "location" : "30.23423/23.23434",
+                        "location_name" : "Brac IT Services"
+                    },
+                }
+                "response" : { 
+                    "status" : "200",
+                    "success": "true",
+                    "message": "New fovourite place has been added",
+                    "error" : [{}]
+            }
+            
+
++ Response 409 (application/json)
+
+   
+
+    + Body
+
+            {
+                "data" : {}
+                "response" : { 
+                    "status" : "409",
+                    "success": "false",
+                    "message": "Conflict",
+                    "error" : [{
+                    "message" : "Name Already Exists"
+                    }]
+            }
+            
+
+### Update Favourites [Put]
+
+Route : -/user/profile/my/favorites
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
+    
++ Request (application/json)
+
+        {
+            "user_id": "s23-234-234-234",
+            "favorites" : { 
+                    "favorites_id" : 2342,
+                    "name" : "Work",
+                    "location" : "30.23423/23.23434",
+                    "location_name" : "Brac IT Services"
+                }
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            {
+
+                "data" : {
+                    "favorites" : {
+                        "favorites_id" : 2342,
+                        "name" : "Work",
+                        "location" : "30.23423/23.23434",
+                        "location_name" : "Brac IT Services"
+                    },
+                }
+                "response" : { 
+                    "status" : "200",
+                    "success": "true",
+                    "message": "successful",
+                    "error" : [{}]
+                }
+            }
+
+
++ Response 409 (application/json)
+
+   
+
+    + Body
+
+            {
+                
+                "data" : {
+                    "favorites" : { 
+                        "name" : "Work",
+                        "location" : "30.23423/23.23434",
+                        "location_name" : "Brac IT Services"
+                    },
+                }
+                "response" : { 
+                    "status" : "409",
+                    "success": "false",
+                    "message": "Conflict",
+                    "error" : [{
+                    "message" : "Name Already Exists"
+                    }]
+            }
+            
+
+### Delete Favourites [Delete]
+
+Route : -/user/profile/my/favorites
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
+    
++ Request (application/json)
+
+        {
+            "user_id": "s23-234-234-234",
+           
+            "favorites_id" : 2342,
+                  
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            {
+
+                "data" : { },
+                "response" : { 
+                    "status" : "200",
+                    "success": "true",
+                    "message": "successful",
+                    "error" : [{}]
+                }
+            }
+
+
++ Response 400 (application/json)
+
+   
+
+    + Body
+
+            {
+                
+                "data" : {
+                    "favorites" : { 
+                        "name" : "Work",
+                        "location" : "30.23423/23.23434",
+                        "location_name" : "Brac IT Services"
+                    },
+                }
+                "response" : { 
+                    "status" : "400",
+                    "success": "false",
+                    "message": "Bad Request",
+                    "error" : [{
+                    "message" : "company dont exist"
+                    }]
+            }
+            
+
             
 
 ### View Host profile[Get]
@@ -996,80 +1426,7 @@ Route : -/user/rides/[trip_id]/rider/[rider_id]
             
                 error: { [] }
         }
-            
-### update Profile [PUT] 
-
- This is for editing one's profile, for an overall change.
- 
- + Headers
-    {
-        "api_key" : "Token cjhh"
-    }
-+ Request (application/json)
-
-        {   
-            "full_name" : "razib",
-            "profile_pic" : "url",
-            "fb_id" : "facebook.com/teekhikheer",
-            "personal_email" : "meethachuri@apple.com",
-            "birth_date" : "26.01.1900",
-            "gender" : "male/female",
-            "office_start_time" : "8:00",
-            "office_end_time" : "16:00",
-            "country_code" : "BD-007",
-           
-        }
-
-        
-+ Response (application/json)
-    
-        { 
-           
-            "data" : { "user_id" : "hiou74564634",
-                        "full_name" : "razib",
-                        "profile_pic" : "url",
-                        "fb_id" : "facebook.com/teekhikheer",
-                        "personal_email" : "meethachuri@apple.com",
-                        "birth_date" : "26.01.1900",
-                        "gender" : "male/female",
-                        "office_start_time" : "8:00",
-                        "office_end_time" : "16:00",
-                        "phone_number" : "01911232222",
-                        "country_code" : "BD-007",
-                        "joining_date" : "2/3/2015"
-                         }
-                         
-                          "response" : {
-                    "status" : "200",
-                    "message" : "Successful",
-                    "success" : "true",
-                    "error" : [{}]
-                    },
-                         
-                         }
-                    
-### Add request company [Post] 
-            
-This is for adding a company by an user if it doesn't exist in DB
-
-+ Headers
-    {
-        "api_key" : "Token gfhjfh"
-    }
-    
-+ Request (application/json)
-
-        {
-            "company_name" : "bits",
-            "phone_number" : "01735680276",
-            "address" : "Tejgaon Link Road",
-            "location" : "lat/lng",
-            "location_name" : "niketan/gulshan",
-            "company_email" : "bits@bracits.com"
-        }
-        
-+ Response 200 (application/json)
-
+          
 ### View friend list [Get]
 
 This is for the users to see their friends list, who are in the list
@@ -1262,6 +1619,294 @@ Route : -/user/logout
                         "error" : [{}]
                         },
             }
+            
+
+### Create Trip [POST]
+
+Route : -/user/rides/
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
++ Request (application/json)
+
+        {
+            "time":"4:50 PM",
+            "date":"2018-09-09",
+            "start_location_name": "niketan",
+            "start_location": "lat/lon",
+            "end_location_name": "uttara",
+            "end_location": "lat/lon",
+            "vehicle_type": "2",
+            "personal": "yes/no",
+            "is_ac": true,
+            "is_music": true,
+            "is_smoking": true,
+            "number_of_seat": "4",
+            "price_per_seat": "120",
+            "accept_auto": true,
+            "need_confirmation": true,
+            "amenities" : [
+                {
+                    "amenity_id" : "1"
+                },
+                {
+                    "amenity_id" : "2"
+                },
+            ]
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            {
+            
+                "data" : {
+                    "trip" : {
+                        "trip_id" : "d54we68qw",
+                        "time":"4:50 PM",
+                        "date":"2018-09-09",
+                        "start_location_name": "niketan",
+                        "start_location": "lat/lon",
+                        "end_location_name": "uttara",
+                        "end_location": "lat/lon",
+                        "vehicle_type": "2",
+                        "personal": "yes/no",
+                        "is_ac": true,
+                        "is_music": true,
+                        "is_smoking": true,
+                        "number_of_seat": "4",
+                        "number_of_seat_available": "1",
+                        "price_per_seat": "120",
+                        "accept_auto": true,
+                        "need_confirmation": true,
+                        "host": {
+                            "user_id" : "sdf-sdf-sdfsdf-32sdf"
+                            "full_name":"raju mazumder",
+                        },
+                        "status" : {
+                            "id" : 23434,
+                            "desc" : "Trip is ready",
+                        }
+                    },
+                    "amenities" : [
+                        {
+                        "amenity_id" : "1"
+                        },
+                        {
+                        "amenity_id" : "2"
+                        },
+                    ]
+                },
+                "response" : { 
+                "status" : "200",
+                "success": "true",
+                "message": "Trip Has Been Created",
+                "error" : [{}]
+                }
+            }
+            
+
+### Edit Trip [Put]
+
+Route : -/user/rides/
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
++ Request (application/json)
+
+        {
+          
+            "trip_id" : "a5sd69a6s",
+             "time":"4:50 PM",
+            "date":"2018-09-09",
+          "start_location_name": "niketan",
+             "start_location": "lat/lon",
+            "end_location_name": "uttara",
+              "end_location": "lat/lon",
+            "vehicle_type": "car",
+            "personal": "yes/no",
+            "is_ac": true,
+            "is_music": true,
+            "is_smoking": true,
+            "number_of_seat": "4",
+            "price_per_seat": "120",
+            "accept_auto": true,
+            "need_confirmation": true,
+           
+            "amenities" : [
+            {
+            "amenity_id" : "1"
+            },
+            {
+            "amenity_id" : "2"
+            },
+            ]
+            
+           
+           
+            
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            {
+            
+            "data" : {},
+            
+                                     "response" : { 
+            "status" : "200",
+            "success": "true",
+            "message": "Successfully modified",
+            "error" : [{}]
+            }
+
++ Response 412 (application/json)
+
+   
+
+    + Body
+
+            {
+            
+            "data" : {},
+            
+        "response" : { 
+            "status" : "412",
+            "success": "false",
+            "message": "precondition Failed",
+            "error" : [{
+            "msg" : "can't edit a already started trip"
+            }]
+            }
+
+
+### Cancel Trip [Put]
+
+Route : -/user/rides/cancel
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
++ Request (application/json)
+
+        {
+          
+            "trip_id" : "a5sd69a6s",
+            "host_id" : "ad5wa9wq"
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            {
+                "data" : {
+                    "trip_id" : "a5sd69a6s",
+                    "trip_status" : "cancelled"
+                },
+                
+                "response" : { 
+                "status" : "200",
+                "success": "true",
+                "message": "Trip is cancelled",
+                "error" : [{}]
+            }
+
+
++ Response 412 (application/json)
+
+   
+
+    + Body
+
+            {
+            
+                "data" : {},
+                
+                "response" : { 
+                    "status" : "412",
+                    "success": "false",
+                    "message": "Cannot cancel with members ontrip",
+                    "error" : [{}]
+                    }
+            }
+
+
+### Start Trip [PUT]
+
+Route : -/user/rides/start
+
++ Headers
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
+
++ Request (application/json)
+
+        {
+           "trip_id" : "d486w564aw",
+           "host_id" : "8e67rw8",
+        }
+
++ Response 200 (application/json)
+
+   
+
+    + Body
+
+            {
+            
+                "data" : {
+                    "trip_id: "r4e6w",      
+                    "status" : "onroute"
+                    },
+                "response" : { 
+                    "status" : "200",
+                    "success": "true",
+                    "message": "Trip has been started",
+                    "error" : [{}]
+                    },
+            }
+
+
++ Response 412 (application/json)
+
+   
+
+    + Body
+
+            {
+            
+                "data" : {
+                    "trip_id: "r4e6w",      
+                    "status" : "not-onroute"
+                },
+                "response" : { 
+                    "status" : "412",
+                    "success": "false",
+                    "message": "Trip is not started",
+                    "error" : [{
+                        "messsage" : "You need atleast one rider to start the trip"
+                    }]
+                },
+            }
+             
+            
+
 
 ### Find Trip [GET]
 
@@ -1534,154 +2179,6 @@ user : admin
             },
             
 
-### Create Trip [POST]
-
-Route : -/user/rides/
-
-+ Headers
-    {
-        "api_key":"Token dgsdgdsgds"
-    }
-+ Request (application/json)
-
-        {
-            "time":"4:50 PM",
-            "date":"2018-09-09",
-            "start_location_name": "niketan",
-            "start_location": "lat/lon",
-            "end_location_name": "uttara",
-            "end_location": "lat/lon",
-            "vehicle_type": "2",
-            "personal": "yes/no",
-            "is_ac": true,
-            "is_music": true,
-            "is_smoking": true,
-            "number_of_seat": "4",
-            "price_per_seat": "120",
-            "accept_auto": true,
-            "need_confirmation": true,
-            "amenities" : [
-                {
-                    "amenity_id" : "1"
-                },
-                {
-                    "amenity_id" : "2"
-                },
-            ]
-        }
-
-+ Response 200 (application/json)
-
-   
-
-    + Body
-
-            {
-            
-                "data" : {
-                    "trip" : {
-                        "trip_id" : "d54we68qw",
-                        "time":"4:50 PM",
-                        "date":"2018-09-09",
-                        "start_location_name": "niketan",
-                        "start_location": "lat/lon",
-                        "end_location_name": "uttara",
-                        "end_location": "lat/lon",
-                        "vehicle_type": "2",
-                        "personal": "yes/no",
-                        "is_ac": true,
-                        "is_music": true,
-                        "is_smoking": true,
-                        "number_of_seat": "4",
-                        "number_of_seat_available": "1",
-                        "price_per_seat": "120",
-                        "accept_auto": true,
-                        "need_confirmation": true,
-                        "host": {
-                            "user_id" : "sdf-sdf-sdfsdf-32sdf"
-                            "full_name":"raju mazumder",
-                        },
-                        "status" : {
-                            "id" : 23434,
-                            "desc" : "Trip is ready",
-                        }
-                    },
-                    "amenities" : [
-                        {
-                        "amenity_id" : "1"
-                        },
-                        {
-                        "amenity_id" : "2"
-                        },
-                    ]
-                },
-                "response" : { 
-                "status" : "200",
-                "success": "true",
-                "message": "Trip Has Been Created",
-                "error" : [{}]
-                }
-            }
-
-### Start Trip [PUT]
-
-Route : -/user/rides/
-
-+ Headers
-    {
-        "api_key":"Token dgsdgdsgds"
-    }
-
-+ Request (application/json)
-
-        {
-           "trip_id" : "d486w564aw",
-           "host_id" : "8e67rw8",
-        }
-
-+ Response 200 (application/json)
-
-   
-
-    + Body
-
-            {
-            
-                "data" : {
-                    "trip_id: "r4e6w",      
-                    "status" : "onroute"
-                    },
-                "response" : { 
-                    "status" : "200",
-                    "success": "true",
-                    "message": "Trip has been started",
-                    "error" : [{}]
-                    },
-            }
-
-
-+ Response 412 (application/json)
-
-   
-
-    + Body
-
-            {
-            
-                "data" : {
-                    "trip_id: "r4e6w",      
-                    "status" : "not-onroute"
-                },
-                "response" : { 
-                    "status" : "412",
-                    "success": "false",
-                    "message": "Trip is not started",
-                    "error" : [{
-                        "messsage" : "You need atleast one rider to start the trip"
-                    }]
-                },
-            }
-             
 
 ### Send Trip Request [POST]
 
@@ -1757,139 +2254,7 @@ Route : -/user/rides/request
             }
 
 
-### Edit Trip [Put]
 
-Route : -/user/rides/
-
-+ Headers
-    {
-        "api_key":"Token dgsdgdsgds"
-    }
-+ Request (application/json)
-
-        {
-          
-            "trip_id" : "a5sd69a6s",
-             "time":"4:50 PM",
-            "date":"2018-09-09",
-          "start_location_name": "niketan",
-             "start_location": "lat/lon",
-            "end_location_name": "uttara",
-              "end_location": "lat/lon",
-            "vehicle_type": "car",
-            "personal": "yes/no",
-            "is_ac": true,
-            "is_music": true,
-            "is_smoking": true,
-            "number_of_seat": "4",
-            "price_per_seat": "120",
-            "accept_auto": true,
-            "need_confirmation": true,
-           
-            "amenities" : [
-            {
-            "amenity_id" : "1"
-            },
-            {
-            "amenity_id" : "2"
-            },
-            ]
-            
-           
-           
-            
-        }
-
-+ Response 200 (application/json)
-
-   
-
-    + Body
-
-            {
-            
-            "data" : {},
-            
-                                     "response" : { 
-            "status" : "200",
-            "success": "true",
-            "message": "Successfully modified",
-            "error" : [{}]
-            }
-
-+ Response 412 (application/json)
-
-   
-
-    + Body
-
-            {
-            
-            "data" : {},
-            
-        "response" : { 
-            "status" : "412",
-            "success": "false",
-            "message": "precondition Failed",
-            "error" : [{
-            "msg" : "can't edit a already started trip"
-            }]
-            }
-
-
-### Cancel Trip [Put]
-
-Route : -/user/rides/
-
-+ Headers
-    {
-        "api_key":"Token dgsdgdsgds"
-    }
-+ Request (application/json)
-
-        {
-          
-            "trip_id" : "a5sd69a6s",
-            "host_id" : "ad5wa9wq"
-        }
-
-+ Response 200 (application/json)
-
-   
-
-    + Body
-
-            {
-                "data" : {
-                    "trip_id" : "a5sd69a6s",
-                    "trip_status" : "cancelled"
-                },
-                
-                "response" : { 
-                "status" : "200",
-                "success": "true",
-                "message": "Trip is cancelled",
-                "error" : [{}]
-            }
-
-
-+ Response 412 (application/json)
-
-   
-
-    + Body
-
-            {
-            
-                "data" : {},
-                
-                "response" : { 
-                    "status" : "412",
-                    "success": "false",
-                    "message": "Cannot cancel with members ontrip",
-                    "error" : [{}]
-                    }
-            }
 
 ### View All Trip Requests [Get]
 
@@ -2342,239 +2707,8 @@ Route : -/user/rides/
  
  
  
-### View Favourites [Get]
-
-Route : -/user/profile/favorites
-
-+ Headers
-    {
-        "api_key":"Token dgsdgdsgds"
-    }
-    
-+ Request (application/json)
-
-        {
-            "user_id": "s23-234-234-234"
-        }
-
-+ Response 200 (application/json)
-
-   
-
-    + Body
-
-            {
-                "data" : {
-                    "favorites" : [
-                        { 
-                            "favorites_id" : 2342,
-                            "name" : "Work",
-                            "location" : "30.23423/23.23434",
-                            "location_name" : "Brac IT Services"
-                        },
-                        { 
-                            "favorites_id" : 2342,
-                            "name" : "Home",
-                            "location" : "30.23423/23.23434",
-                            "location_name" : "agargaon"
-                        },
-                        { 
-                            "favorites_id" : 2342,
-                            "name" : "AIUB",
-                            "location" : "30.23423/23.23434",
-                            "location_name" : "American International University Bangladesh"
-                        }
-                    ],
-                }
-                "response" : { 
-                    "status" : "200",
-                    "success": "true",
-                    "message": "successful",
-                    "error" : [{}]
-                }
-            }
-            
-### Add Favourites [Post]
-
-Route : -/user/profile/favorites
-
-+ Headers
-    {
-        "api_key":"Token dgsdgdsgds"
-    }
-    
-+ Request (application/json)
-
-        {
-            "user_id": "s23-234-234-234",
-            "favorites" : { 
-                    "name" : "Work",
-                    "location" : "30.23423/23.23434",
-                    "location_name" : "Brac IT Services"
-                },
-        }
-
-+ Response 200 (application/json)
-
-   
-
-    + Body
-
-            {
-                "data": {
-                    "favorites" : { 
-                        "favorites_id" : 2342,
-                        "name" : "Work",
-                        "location" : "30.23423/23.23434",
-                        "location_name" : "Brac IT Services"
-                    },
-                }
-                "response" : { 
-                    "status" : "200",
-                    "success": "true",
-                    "message": "New fovourite place has been added",
-                    "error" : [{}]
-            }
-            
-
-+ Response 409 (application/json)
-
-   
-
-    + Body
-
-            {
-                "data" : {}
-                "response" : { 
-                    "status" : "409",
-                    "success": "false",
-                    "message": "Conflict",
-                    "error" : [{
-                    "message" : "Name Already Exists"
-                    }]
-            }
-            
-
-### Update Favourites [Put]
-
-Route : -/user/profile/favorites
-
-+ Headers
-    {
-        "api_key":"Token dgsdgdsgds"
-    }
-    
-+ Request (application/json)
-
-        {
-            "user_id": "s23-234-234-234",
-            "favorites" : { 
-                    "favorites_id" : 2342,
-                    "name" : "Work",
-                    "location" : "30.23423/23.23434",
-                    "location_name" : "Brac IT Services"
-                }
-        }
-
-+ Response 200 (application/json)
-
-   
-
-    + Body
-
-            {
-
-                "data" : {
-                    "favorites" : {
-                        "favorites_id" : 2342,
-                        "name" : "Work",
-                        "location" : "30.23423/23.23434",
-                        "location_name" : "Brac IT Services"
-                    },
-                }
-                "response" : { 
-                    "status" : "200",
-                    "success": "true",
-                    "message": "successful",
-                    "error" : [{}]
-                }
-            }
-
-
-+ Response 409 (application/json)
-
-   
-
-    + Body
-
-            {
-                
-                "data" : {
-                    "favorites" : { 
-                        "name" : "Work",
-                        "location" : "30.23423/23.23434",
-                        "location_name" : "Brac IT Services"
-                    },
-                }
-                "response" : { 
-                    "status" : "409",
-                    "success": "false",
-                    "message": "Conflict",
-                    "error" : [{
-                    "message" : "Name Already Exists"
-                    }]
-            }
-            
-
-//Completed till here
-
-  
-### View Pending Friend Request [Get]
-
-Here user will see the list of pending friends request
-
-+ Headers 
-    {
-        "api_key":"Token dgsdgdsgds"
-    }
-    
-+ Request (application/json)
-
-        {
-            "user_id" : "2637"
-        }
-        
-+ Response 200 (application/json)
-
-    + Body
-    
-            {
-                "data": {
-                    "friends" : [{
-                                "from":"d56qwe6wq",
-                                "to":"46qwe4qw",
-                                "status":"pending",
-                            
-                            "mutual_friends": [
-                            {
-                                "user_id" : "4as56d46aw"
-                                "full_name": "raju mazumder"
-                                }
-                            ],
-                            
-                            }],
-                           "response" : { 
-                    "status" : "200",
-                    "success": "true",
-                    "message": "Successful",
-                    "error" : [{}]       
-                        
-                    
-                        
-            }
-
 [Admin]
-### Edit Company [Post]
+### Edit Admin Company [Post]
 
 + Headers
     {
@@ -2610,7 +2744,7 @@ Here user will see the list of pending friends request
             }
 
 [Admin]
-### Delete company[Delete] 
+### Delete Admin company[Delete] 
 
 + Headers
     {
@@ -2724,6 +2858,54 @@ Route : -/user/friend/send
                     "error" : [{
                     "message" : "Can not send friend rquest"}]
                 }
+            }
+
+
+  
+### View Pending Friend Request [Get]
+
+Here user will see the list of pending friends request
+
+Route : -/user/friends/pending
+
++ Headers 
+    {
+        "api_key":"Token dgsdgdsgds"
+    }
+    
++ Request (application/json)
+
+        {
+            "user_id" : "2637"
+        }
+        
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "data": {
+                    "friends" : [{
+                                "from":"d56qwe6wq",
+                                "to":"46qwe4qw",
+                                "status":"pending",
+                            
+                            "mutual_friends": [
+                            {
+                                "user_id" : "4as56d46aw"
+                                "full_name": "raju mazumder"
+                                }
+                            ],
+                            
+                            }],
+                           "response" : { 
+                    "status" : "200",
+                    "success": "true",
+                    "message": "Successful",
+                    "error" : [{}]       
+                        },
+                    
+                        
             }
 
 
